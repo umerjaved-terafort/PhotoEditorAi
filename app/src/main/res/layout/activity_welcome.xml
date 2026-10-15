@@ -8,57 +8,103 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/bg_splash_gradient">
 
-        <ImageView
-            android:id="@+id/icon_app"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginTop="100dp"
-            android:contentDescription="@null"
-            android:src="@mipmap/ic_launcher"
+        <View
+            android:id="@+id/haloOuter"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/bg_welcome_halo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/haloInner"
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:background="@drawable/bg_welcome_halo_inner"
+            app:layout_constraintBottom_toBottomOf="@id/haloOuter"
+            app:layout_constraintEnd_toEndOf="@id/haloOuter"
+            app:layout_constraintStart_toStartOf="@id/haloOuter"
+            app:layout_constraintTop_toTopOf="@id/haloOuter" />
+
+        <FrameLayout
+            android:id="@+id/icon_app"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_brand_icon"
+            app:layout_constraintBottom_toBottomOf="@id/haloOuter"
+            app:layout_constraintEnd_toEndOf="@id/haloOuter"
+            app:layout_constraintStart_toStartOf="@id/haloOuter"
+            app:layout_constraintTop_toTopOf="@id/haloOuter">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_photo_spark" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvAppLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/bold"
+            android:gravity="center"
+            android:text="@string/welcome_app_label"
+            android:textColor="@color/color_muted"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/haloOuter" />
 
         <TextView
             android:id="@+id/tvLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/bold"
             android:gravity="center"
-            android:paddingHorizontal="12dp"
+            android:paddingHorizontal="24dp"
             android:text="@string/well_comeback"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintTop_toBottomOf="@id/icon_app" />
+            android:textColor="@color/color_brand"
+            android:textSize="34sp"
+            app:layout_constraintTop_toBottomOf="@id/tvAppLabel" />
+
+        <TextView
+            android:id="@+id/tvWelcomeDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/regular"
+            android:gravity="center"
+            android:text="@string/welcome_subtitle"
+            android:textColor="@color/color_muted"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/tvLabel" />
 
         <FrameLayout
             android:id="@+id/btnStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_button_app_transparent"
+            android:background="@drawable/bg_btn_primary"
             android:clickable="true"
             android:focusable="true"
-            android:minWidth="72dp"
-            android:minHeight="28dp"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="4dp"
-            app:layout_constraintBottom_toTopOf="@id/fr_ads"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/fr_ads">
 
             <TextView
                 android:id="@+id/tvStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/regular"
-                android:text="@string/start"
-                android:textColor="#454545"
-                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/bold"
+                android:text="@string/start_creating"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
@@ -69,13 +115,14 @@
                 android:layout_height="18dp"
                 android:layout_gravity="center"
                 android:indeterminate="true"
-                android:indeterminateTint="#454545" />
+                android:indeterminateTint="@color/white" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/fr_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/bg_splash_gradient">
 
         <RelativeLayout
             android:id="@+id/rlTop"
@@ -24,65 +24,84 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                app:tint="@color/textPrimary" />
         </RelativeLayout>
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/text_bold"
-            android:layout_marginHorizontal="@dimen/_18sdp"
-            android:layout_marginTop="@dimen/_70sdp"
-            android:gravity="center"
-            android:lineSpacingExtra="4dp"
-            android:textColor="@color/black"
+        <FrameLayout
+            android:id="@+id/iconBrand"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/bg_brand_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlTop" />
+            app:layout_constraintTop_toBottomOf="@id/rlTop">
 
-        <!-- Subtitle -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_photo_spark" />
+        </FrameLayout>
+
         <TextView
-            android:id="@+id/tvSubtitle"
+            android:id="@+id/tvTitle"
+            style="@style/text_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_18sdp"
-            android:layout_marginTop="25dp"
-            style="@style/text_bold_12"
+            android:layout_marginHorizontal="@dimen/_22sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/uninstall_retain_title"
+            android:textColor="@color/textPrimary"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iconBrand" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            style="@style/text_regular_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24sdp"
+            android:layout_marginTop="12dp"
             android:gravity="center"
             android:lineSpacingExtra="2dp"
-            android:text="@string/content_confirm_uninstall"
-            android:textColor="#AAAAB8"
+            android:text="@string/uninstall_retain_subtitle"
+            android:textColor="@color/color_muted"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <TextView
             android:id="@+id/btnTryAgain"
+            style="@style/text_medium_14"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_44sdp"
+            android:layout_height="52dp"
             android:layout_marginHorizontal="@dimen/_22sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/bg_btn_primary"
             android:gravity="center"
             android:text="@string/try_again"
-            style="@style/text_bold_12"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
 
         <TextView
             android:id="@+id/btnStillUninstall"
+            style="@style/text_medium_14"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_44sdp"
+            android:layout_height="52dp"
             android:layout_marginHorizontal="@dimen/_22sdp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#33AAAABB"
+            android:background="@drawable/bg_btn_outline"
             android:gravity="center"
-            style="@style/text_bold_12"
             android:text="@string/still_want_to_uninstall"
-            android:textColor="@color/black"
+            android:textColor="@color/textPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnTryAgain" />
@@ -91,9 +110,8 @@
             android:id="@+id/fr_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="1dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="vertical"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="8dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">

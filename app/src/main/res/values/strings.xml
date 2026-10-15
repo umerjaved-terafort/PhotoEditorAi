@@ -1,11 +1,19 @@
 <resources>
-    <string name="app_name" translatable="false">ITG Project Base</string>
-    <string name="language" translatable="false">Language</string>
-    <string name="ads_are_about_to_be_shown">Ads are about to be shown...</string>
+    <string name="app_name" translatable="false">AIPhoto</string>
+    <string name="language" translatable="false">Select Language</string>
+    <string name="ads_are_about_to_be_shown">This action may contain advertising</string>
+    <string name="splash_tagline">Create Magic in One Tap</string>
+    <string name="brand_ai">AI</string>
+    <string name="brand_photo">Photo</string>
+    <string name="welcome_app_label">PicsGen · AI Image &amp; Video</string>
+    <string name="welcome_subtitle">Your templates and creations are right where you left them. New effects are waiting.</string>
+    <string name="start_creating">Start Creating</string>
+    <string name="uninstall_retain_title">Over 90% of users create stunning AI photos in just one tap.</string>
+    <string name="uninstall_retain_subtitle">Don\'t miss trending templates, HD photos and AI videos, all in one app.</string>
     <string name="please_select_language">Please select language</string>
     <string name="press_back_again_to_exit">Press back again to exit</string>
     <string name="get_started">Get Started</string>
-    <string name="next">next</string>
+    <string name="next">Next</string>
     <string name="txt_continue">Continue</string>
     <string name="txt_request_record_permission">Recording is the permission required for the app to work</string>
     <string name="txt_denie">To use this feature, you need permission</string>
@@ -13,14 +21,15 @@
     <string name="txt_later" translatable="false"><u>Later</u></string>
     <string name="txt_rate_5_star" translatable="false">If you like this app, please rate our app 5 stars in store!</string>
     <string name="txt_do_you_like_our_app" translatable="false">Do you like our app?</string>
-    <string name="onboarding_title_1">Title onboarding 1</string>
-    <string name="onboarding_des_1">Description onboarding 1</string>
-    <string name="onboarding_title_2">Title onboarding 2</string>
-    <string name="onboarding_des_2">Description onboarding 2</string>
-    <string name="onboarding_title_3">Title onboarding 3</string>
-    <string name="onboarding_des_3">Description onboarding 3</string>
-    <string name="onboarding_title_4">Title onboarding 4</string>
-    <string name="onboarding_des_4">Description onboarding 4</string>
+    <string name="onboarding_title_1">Turn Any Photo into AI Art</string>
+    <string name="onboarding_des_1">Restyle any photo in one tap.</string>
+    <string name="onboarding_title_2">Bring Your Photos to Life</string>
+    <string name="onboarding_des_2">Turn any photo into a short AI video.</string>
+    <string name="onboarding_title_3">Make Every Photo Sharp</string>
+    <string name="onboarding_des_3">Fix blurry photos and upscale to HD.</string>
+    <string name="onboarding_title_4">Effects for Every Mood</string>
+    <string name="onboarding_des_4">Cartoon selfies, hair colours and more.</string>
+    <string name="start_label">Start</string>
 
     <string name="applying_selected_language" translatable="false">Applying selected language...</string>
     <string name="text_restart_app">Restart App</string>
@@ -30,11 +39,11 @@
     <!--    Uninstall-->
     <string name="content_confirm_uninstall">Why remvove the app</string>
     <string name="try_again">Try Again</string>
-    <string name="still_want_to_uninstall">Still want to uninstall</string>
+    <string name="still_want_to_uninstall">Still Want To Uninstall</string>
     <string name="issues_encountered_during_usage">Issues encountered during usage</string>
     <string name="txt_cancel">Cancel</string>
     <string name="txt_uninstall">Uninstall</string>
-    <string name="survey_1">Feature does not working</string>
+    <string name="survey_1">Feature not working</string>
     <string name="survey_2">Too many ads</string>
     <string name="survey_3">I don’t need it</string>
     <string name="survey_4">Other</string>
@@ -53,6 +62,6 @@
     <string name="let_me_recommend">Let me recommend</string>
     <string name="share_to">Share to</string>
     <string name="we_re_better_than_ever">We’re better than ever</string>
-    <string name="well_comeback">Welcome back!</string>
+    <string name="well_comeback">Welcome back</string>
     <string name="start">Start</string>
 </resources>

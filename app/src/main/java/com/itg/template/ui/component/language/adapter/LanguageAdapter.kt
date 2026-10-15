@@ -1,11 +1,12 @@
 package com.itg.template.ui.component.language.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.itg.template.R
 import com.itg.template.databinding.ItemLanguageBinding
 import com.itg.template.ui.component.language.data.LanguageModel
 
@@ -21,6 +22,8 @@ class LanguageAdapter(
 
         fun bind(item: LanguageModel) {
             binding.tvLanguageName.text = item.name
+            binding.tvLanguageNative.text = item.nativeName
+            binding.ivFlag.setImageResource(item.imageResId)
             toggleSelected(item.selected)
 
             binding.root.setOnClickListener {
@@ -32,7 +35,11 @@ class LanguageAdapter(
             if (binding.rbLanguageSelected.isChecked != isSelected) {
                 binding.rbLanguageSelected.isChecked = isSelected
             }
-            binding.item.strokeColor = if (isSelected) Color.BLACK else Color.TRANSPARENT
+            binding.item.strokeColor = ContextCompat.getColor(
+                binding.root.context,
+                if (isSelected) R.color.color_brand else R.color.color_stroke_soft
+            )
+            binding.item.cardElevation = if (isSelected) 8f else 0f
         }
     }
 

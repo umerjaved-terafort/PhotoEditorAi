@@ -3,15 +3,12 @@ package com.itg.template.ui.component.onboarding
 import android.os.Build
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.ads.module.ads.ERainAd
 import com.itg.template.R
 import com.itg.template.ads.AdRemoteConfig
 import com.itg.template.ads.AdsManager
 import com.itg.template.ads.RemoteConfigUtils
-import com.itg.template.ads.native_confirm_uninstall
 import com.itg.template.ads.native_onboarding_fullscreen_1_3
 import com.itg.template.data.event.EventTracking
 import com.itg.template.databinding.ActivityOnboardingBinding
@@ -24,7 +21,6 @@ import com.itg.template.ui.component.uninstall.ShortcutManager
 import com.itg.template.utils.ITGTrackingHelper
 import com.itg.template.utils.Routes
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
@@ -84,15 +80,6 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         mBinding.viewPager.clipChildren = false
         mBinding.viewPager.offscreenPageLimit = 4
         mBinding.viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_ALWAYS
-        val compositePageTransformer = CompositePageTransformer()
-        compositePageTransformer.addTransformer(MarginPageTransformer(100))
-        compositePageTransformer.addTransformer { view, position ->
-            val r = 1 - abs(position)
-            view.scaleY = 0.8f + r * 0.2f
-            val absPosition = abs(position)
-            view.alpha = 1.0f - (1.0f - 0.3f) * absPosition
-        }
-        mBinding.viewPager.setPageTransformer(compositePageTransformer)
 
         mBinding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -114,9 +101,9 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         onboardingItems.add(
             OnboardingItem(
                 title = R.string.onboarding_title_1,
-                description = R.string.onboarding_title_1,
+                description = R.string.onboarding_des_1,
                 textButton = R.string.next,
-                imageResId = R.mipmap.ic_launcher,
+                imageResId = R.drawable.img_onboarding_1,
                 positionIndicator = 0,
                 isHasNativeOnPage1 = true
             )
@@ -124,18 +111,18 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         onboardingItems.add(
             OnboardingItem(
                 title = R.string.onboarding_title_2,
-                description = R.string.onboarding_title_2,
+                description = R.string.onboarding_des_2,
                 textButton = R.string.next,
-                imageResId = R.mipmap.ic_launcher,
+                imageResId = R.drawable.img_onboarding_2,
                 positionIndicator = 1
             )
         )
         onboardingItems.add(
             OnboardingItem(
                 title = R.string.onboarding_title_3,
-                description = R.string.onboarding_title_3,
+                description = R.string.onboarding_des_3,
                 textButton = R.string.next,
-                imageResId = R.mipmap.ic_launcher,
+                imageResId = R.drawable.img_onboarding_3,
                 positionIndicator = 2,
             )
         )
@@ -152,9 +139,9 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         onboardingItems.add(
             OnboardingItem(
                 title = R.string.onboarding_title_4,
-                description = R.string.onboarding_title_4,
-                textButton = R.string.next,
-                imageResId = R.mipmap.ic_launcher,
+                description = R.string.onboarding_des_4,
+                textButton = R.string.start_label,
+                imageResId = R.drawable.img_onboarding_4,
                 positionIndicator = 3,
                 isHasNativeOnPage4 = true
             )

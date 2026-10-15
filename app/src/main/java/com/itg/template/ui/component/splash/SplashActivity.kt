@@ -41,7 +41,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
     private fun shouldShowLanguageNextTime() = showLanguageNextTime
 
     private val uriVideo = "asset:///video_splash.mp4".toUri()
-    private val isHasVideo = true
+    private val isHasVideo = false
     private val isFromUninstallShortcut: Boolean
         get() = intent.getStringExtra(AppConstants.FROM_SHORTCUT) == AppConstants.ACTION_OPEN_UNINSTALL
 
@@ -93,6 +93,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
     private fun loadingRemoteConfig() {
         object : CountDownTimer(AppConstants.DEFAULT_TIME_SPLASH, 100) {
             override fun onTick(millisUntilFinished: Long) {
+                val elapsed = AppConstants.DEFAULT_TIME_SPLASH - millisUntilFinished
+                val progress = (10 + elapsed * 80 / AppConstants.DEFAULT_TIME_SPLASH).toInt()
+                mBinding.progressSplash.progress = progress.coerceIn(10, 90)
                 if (getConfigSuccess && millisUntilFinished < AppConstants.DEFAULT_LIMIT_TIME_SPLASH) {
                     checkRemoteConfigResult()
                     cancel()
@@ -100,6 +103,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
             }
 
             override fun onFinish() {
+                mBinding.progressSplash.progress = 90
                 if (!getConfigSuccess) {
                     checkRemoteConfigResult()
                 }

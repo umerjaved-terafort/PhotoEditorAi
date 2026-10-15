@@ -9,8 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
-
+        android:background="@drawable/bg_splash_gradient">
 
         <RelativeLayout
             android:id="@+id/rlTop"
@@ -25,8 +24,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_back" />
-
+                android:src="@drawable/ic_back"
+                app:tint="@color/textPrimary" />
 
         </RelativeLayout>
 
@@ -45,24 +44,24 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivIllustration"
                     android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="@dimen/_80sdp"
                     android:layout_marginTop="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_survey" />
 
-                <!-- Tiêu đề -->
                 <TextView
                     android:id="@+id/tvTitle"
                     style="@style/text_bold_16"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
                     android:gravity="center"
                     android:text="@string/issues_encountered_during_usage"
-                    android:textColor="@color/black"
+                    android:textColor="@color/color_brand_text"
+                    android:textSize="21sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivIllustration" />
@@ -71,7 +70,7 @@
                     android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,54 +80,61 @@
                         android:id="@+id/rbFeature"
                         style="@style/text_regular_12"
                         android:layout_width="match_parent"
+                        android:button="@drawable/bg_radio_language"
                         android:gravity="center|start"
-                        android:layoutDirection="rtl"
+                        android:minHeight="46dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/survey_1"
-                        android:textColor="@color/black"
-                        android:textDirection="ltr" />
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="15sp" />
 
                     <RadioButton
                         android:id="@+id/rbAds"
                         style="@style/text_regular_12"
                         android:layout_width="match_parent"
+                        android:button="@drawable/bg_radio_language"
                         android:checked="true"
                         android:gravity="center|start"
-                        android:layoutDirection="rtl"
+                        android:minHeight="46dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/survey_2"
-                        android:textColor="@color/black"
-                        android:textDirection="ltr" />
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="15sp" />
 
                     <RadioButton
                         android:id="@+id/rbDontNeed"
                         style="@style/text_regular_12"
                         android:layout_width="match_parent"
+                        android:button="@drawable/bg_radio_language"
                         android:gravity="center|start"
-                        android:layoutDirection="rtl"
+                        android:minHeight="46dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/survey_3"
-                        android:textColor="@color/black"
-                        android:textDirection="ltr" />
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="15sp" />
 
                     <RadioButton
                         android:id="@+id/rbOther"
                         style="@style/text_regular_12"
                         android:layout_width="match_parent"
+                        android:button="@drawable/bg_radio_language"
                         android:gravity="center|start"
-                        android:layoutDirection="rtl"
+                        android:minHeight="46dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/survey_4"
-                        android:textColor="@color/black"
-                        android:textDirection="ltr" />
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="15sp" />
 
                 </RadioGroup>
 
-                <!-- Hai nút dưới cùng -->
                 <LinearLayout
                     android:id="@+id/bottomButtons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="8dp"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/_16sdp"
+                    android:paddingHorizontal="@dimen/_20sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/radioGroup">
@@ -137,47 +143,43 @@
                         android:id="@+id/btnCancel"
                         style="@style/Widget.Material3.Button"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:layout_height="52dp"
+                        android:layout_marginEnd="@dimen/_6sdp"
                         android:layout_weight="1"
                         android:fontFamily="@font/medium"
                         android:text="@string/txt_cancel"
                         android:textAllCaps="false"
-                        android:textSize="@dimen/_10ssp"
-                        app:backgroundTint="#33AAAABB"
-                        app:cornerRadius="26dp" />
-
-                    <Space
-                        android:layout_width="2dp"
-                        android:layout_height="0dp" />
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/_12ssp"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="26dp"
+                        app:strokeColor="@color/color_stroke_soft"
+                        app:strokeWidth="1dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnUninstall"
                         style="@style/Widget.Material3.Button"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="@dimen/_6sdp"
                         android:layout_weight="1"
                         android:fontFamily="@font/medium"
-                        android:paddingVertical="@dimen/_12sdp"
                         android:text="@string/txt_uninstall"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/_10ssp"
-                        app:backgroundTint="#0575E6"
+                        android:textSize="@dimen/_12ssp"
+                        app:backgroundTint="@color/color_brand"
                         app:cornerRadius="26dp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-
         <FrameLayout
             android:id="@+id/fr_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="1dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="8dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -186,7 +188,6 @@
                 android:id="@+id/shimmer_ads"
                 layout="@layout/layout_shimmer_native_medium" />
         </FrameLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

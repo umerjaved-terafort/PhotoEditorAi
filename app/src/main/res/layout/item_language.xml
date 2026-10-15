@@ -3,49 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
+    <data></data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_12sdp"
-        app:cardBackgroundColor="#ffffff"
-        app:cardCornerRadius="@dimen/_40sdp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="18dp"
         app:cardElevation="0dp"
         app:rippleColor="#10000000"
-        app:strokeColor="@android:color/transparent"
-        app:strokeWidth="@dimen/_1sdp">
+        app:strokeColor="@color/color_stroke_soft"
+        app:strokeWidth="1.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/_13sdp"
-            android:paddingVertical="@dimen/_8sdp">
+            android:gravity="center_vertical"
+            android:minHeight="62dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivFlag"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/PicsGenFlagShape"
+                app:strokeColor="#1417131F"
+                app:strokeWidth="1dp"
+                tools:src="@drawable/ic_english" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLanguageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/color_brand_text"
+                    android:textSize="15sp"
+                    tools:text="English" />
+
+                <TextView
+                    android:id="@+id/tvLanguageNative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/color_muted"
+                    android:textSize="12sp"
+                    tools:text="English" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rbLanguageSelected"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:background="@null"
-                android:buttonTint="@color/radio_button_language"
+                android:button="@drawable/bg_radio_language"
                 android:checked="true"
                 android:clickable="false"
-                android:scaleX="1.15"
-                android:scaleY="1.15" />
-
-            <TextView
-                android:id="@+id/tvLanguageName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:textColor="#000000"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                tools:text="English" />
+                android:minWidth="0dp"
+                android:minHeight="0dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

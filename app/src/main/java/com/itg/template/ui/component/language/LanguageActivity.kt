@@ -86,13 +86,10 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
     }
 
     override fun onClickViews() {
-        mBinding.ivDone.click {
+        mBinding.llDone.click {
             val iso = selectedIso
             appSharedPref.languageCode = iso
             startNextActivity()
-        }
-        mBinding.tvDone.click {
-            mBinding.ivDone.performClick()
         }
     }
 
@@ -103,14 +100,17 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     private fun initLayout() {
         if (isFromSetting) {
+            mBinding.llDone.visibleView()
             mBinding.tvDone.visibleView()
             mBinding.ivDone.visibleView()
             timeDelayDoneButton = 0
         } else {
             if (shouldDelayDoneButton) {
+                mBinding.llDone.goneView()
                 mBinding.ivDone.goneView()
                 mBinding.tvDone.goneView()
             } else {
+                mBinding.llDone.visibleView()
                 mBinding.ivDone.visibleView()
                 mBinding.tvDone.visibleView()
             }
@@ -162,10 +162,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
         if (shouldDelayDoneButton) {
             Handler(Looper.getMainLooper()).postDelayed({
+                mBinding.llDone.visibleView()
                 mBinding.ivDone.visibleView()
                 mBinding.tvDone.visibleView()
             }, timeDelayDoneButton)
         } else {
+            mBinding.llDone.visibleView()
             mBinding.ivDone.visibleView()
             mBinding.tvDone.visibleView()
         }

@@ -132,5 +132,51 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
             2 -> mBinding.imgIndicator2.setImageResource(R.drawable.ic_onboarding_indicator_selected)
             3 -> mBinding.imgIndicator3.setImageResource(R.drawable.ic_onboarding_indicator_selected)
         }
+        applyPageOverlays(onboardingItem.positionIndicator)
+    }
+
+    private fun applyPageOverlays(page: Int) {
+        mBinding.overlayBadge.visibleView()
+        mBinding.overlayOriginal.goneView()
+        mBinding.overlayPlay.goneView()
+        mBinding.overlayTimeline.goneView()
+        mBinding.overlayBeforeDim.goneView()
+        mBinding.overlayDivider.goneView()
+        mBinding.tvBefore.goneView()
+        mBinding.tvAfter.goneView()
+        mBinding.overlayThumbs.goneView()
+        mBinding.overlayChips.goneView()
+
+        when (page) {
+            0 -> {
+                mBinding.tvBadge.text = "AI Templates"
+                mBinding.chip1.text = "Anime"
+                mBinding.chip2.text = "Oil Paint"
+                mBinding.chip3.text = "3D Cartoon"
+                mBinding.overlayOriginal.visibleView()
+                mBinding.overlayChips.visibleView()
+            }
+            1 -> {
+                mBinding.tvBadge.text = "Image → Video"
+                mBinding.overlayPlay.visibleView()
+                mBinding.overlayTimeline.visibleView()
+            }
+            2 -> {
+                mBinding.tvBadge.text = "Upscale to HD"
+                mBinding.overlayBeforeDim.visibleView()
+                mBinding.overlayDivider.visibleView()
+                mBinding.tvBefore.visibleView()
+                mBinding.tvAfter.visibleView()
+            }
+            3 -> {
+                mBinding.tvBadge.text = "Toonify & Effects"
+                mBinding.chip1.text = "Toonify"
+                mBinding.chip2.text = "Hair Colour"
+                mBinding.chip3.text = "Trending"
+                mBinding.overlayThumbs.visibleView()
+                mBinding.overlayChips.visibleView()
+            }
+            else -> mBinding.overlayBadge.goneView()
+        }
     }
 }
