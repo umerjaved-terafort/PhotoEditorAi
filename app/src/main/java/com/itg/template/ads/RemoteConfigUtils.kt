@@ -34,7 +34,7 @@ object RemoteConfigUtils {
         ON_SHOW_DIALOG_CONSENT to true,
         ON_SHOW_NAVIGATION_BUTTON to false,
         DELAY_SHOW_LANGUAGE_DONE_BUTTON to true,
-        ON_ENABLE_UNINSTALL_WIDGET to false,
+        ON_ENABLE_UNINSTALL_WIDGET to true,
         TIME_DELAY_SHOW_LANGUAGE_DONE_BUTTON to DEFAULT_TIME_DELAY_SHOW_LANGUAGE_DONE_BUTTON,
     )
     
@@ -46,7 +46,7 @@ object RemoteConfigUtils {
 
     fun getOnShowNavigationButton(): Boolean = getBoolean(ON_SHOW_NAVIGATION_BUTTON)
     fun getOnShowDialogConsent(): Boolean = getBoolean(ON_SHOW_DIALOG_CONSENT)
-    fun getOnEnableUninstallWidget(): Boolean = getBoolean(ON_ENABLE_UNINSTALL_WIDGET, false)
+    fun getOnEnableUninstallWidget(): Boolean = getBoolean(ON_ENABLE_UNINSTALL_WIDGET, true)
 
     interface Listener {
         fun loadSuccess()
@@ -54,7 +54,11 @@ object RemoteConfigUtils {
 
     lateinit var listener: Listener
     private lateinit var remoteConfig: FirebaseRemoteConfig
-    private val moshi: Moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    private val moshi: Moshi = Moshi.Builder()
+        .add(AdRemoteConfigJsonAdapterFactory())
+        .addLast(KotlinJsonAdapterFactory())
+        .build()
+    private val adRemoteConfigAdapter = moshi.adapter(AdRemoteConfig::class.java)
     private val adUnitConfigAdapter = moshi.adapter(AdUnitConfig::class.java)
     private val forceUpdateAdapter = moshi.adapter(ForceUpdateConfig::class.java)
 
@@ -131,9 +135,38 @@ object RemoteConfigUtils {
         val defaultValue = loadDefaultAdRemoteConfig()
         if (!completed) {
             return defaultValue
-        } else {
+        }
+        return try {
+            val defaultConfig = adRemoteConfigAdapter.fromJson(defaultValue) ?: AdRemoteConfig()
+            val masterValue = remoteConfig.getString(AD_REMOTE_CONFIG)
+            val baseConfig = if (masterValue.isNotBlank()) {
+                try {
+                    adRemoteConfigAdapter.fromJson(masterValue) ?: defaultConfig
+                } catch (_: Exception) {
+                    defaultConfig
+                }
+            } else {
+                defaultConfig
+            }
+
+            val mergedAds = baseConfig.ads.toMutableMap()
+            for ((key, defaultUnit) in defaultConfig.ads) {
+                val unitRaw = remoteConfig.getString(key)
+                if (unitRaw.isNotBlank()) {
+                    try {
+                        val wrapped = adRemoteConfigAdapter.fromJson("{\"$key\":$unitRaw}")
+                        val parsedUnit = wrapped?.ads?.get(key)
+                        if (parsedUnit != null && (parsedUnit != defaultUnit || masterValue.isBlank())) {
+                            mergedAds[key] = parsedUnit
+                        }
+                    } catch (_: Exception) {
+                    }
+                }
+            }
+            adRemoteConfigAdapter.toJson(AdRemoteConfig(ads = mergedAds))
+        } catch (_: Exception) {
             val configValue = remoteConfig.getString(AD_REMOTE_CONFIG)
-            return configValue.ifBlank { defaultValue }
+            configValue.ifBlank { defaultValue }
         }
     }
 

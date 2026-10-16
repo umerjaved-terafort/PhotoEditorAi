@@ -2,33 +2,20 @@
   "inter_splash": {
     "id": "ca-app-pub-3940256099942544/1033173712",
     "isEnable": true,
-    "enable_ua_check": false
-  },
-  "inter_splash_uninstall": {
-    "id": "ca-app-pub-3940256099942544/1033173712",
-    "isEnable": true,
+    "scenario": "Show ads when users open app",
     "enable_ua_check": false
   },
   "banner_splash": {
     "id": "ca-app-pub-3940256099942544/9214589741",
     "isEnable": true,
+    "scenario": "Banner ads are displayed below the splash screen.",
     "reloadIntervalSeconds": 30,
-    "enable_ua_check": false
-  },
-  "banner_splash_uninstall": {
-    "id": "ca-app-pub-3940256099942544/9214589741",
-    "isEnable": true,
-    "reloadIntervalSeconds": 30,
-    "enable_ua_check": false
-  },
-  "open_resume": {
-    "id": "ca-app-pub-3940256099942544/9257395921",
-    "isEnable": false,
     "enable_ua_check": false
   },
   "native_language_1": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear before the user selects a language, on the first visit",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -38,6 +25,7 @@
   "native_language_1_click": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear after the user selects a language, on the first visit",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -47,6 +35,7 @@
   "native_language_2": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear before the user selects a language, on the second visit onward",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -56,6 +45,7 @@
   "native_language_2_click": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear after the user selects a language, on the second visit onward",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -65,6 +55,7 @@
   "native_onboarding_1_1": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear on onboarding screen 1, on the first visit",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -74,6 +65,7 @@
   "native_onboarding_2_1": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear on onboarding screen 1, on the second visit onward",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -83,6 +75,7 @@
   "native_onboarding_1_4": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear on onboarding screen 4, on the first visit",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -92,60 +85,80 @@
   "native_onboarding_2_4": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Native ads appear on onboarding screen 4, on the second visit onward",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
     "components": ["icon_headline", "body", "media", "cta"],
     "enable_ua_check": false
   },
-  "native_onboarding_fullscreen_1_3": {
+  "native_onboarding_fullscreen_1_2": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Full-screen native ads appear between screen 2 and screen 3, on the first visit",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
-    "components": ["media", "icon_headline","body","cta"],
+    "components": ["media", "icon_headline", "body", "cta"],
     "enable_ua_check": true
   },
-  "native_onboarding_fullscreen_2_3": {
+  "native_onboarding_fullscreen_2_2": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Full-screen native ads appear between screen 2 and screen 3, on the second visit onward",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
-    "components": ["media", "icon_headline","body","cta"],
+    "components": ["media", "icon_headline", "body", "cta"],
     "enable_ua_check": true
   },
-  "native_onboarding_fullscreen_1_4": {
-    "id": "ca-app-pub-3940256099942544/2247696110",
+  "inter_welcome_back": {
+    "id": "ca-app-pub-3940256099942544/1033173712",
     "isEnable": true,
-    "colorCTA": "default",
-    "heightCTA": 45,
-    "positionCTA": "BOTTOM",
-    "components": ["media", "icon_headline","body","cta"],
-    "enable_ua_check": true
+    "scenario": "Ads open are shown when the user reopens the app from background or recent apps.",
+    "enable_ua_check": false
   },
-  "native_onboarding_fullscreen_2_4": {
-    "id": "ca-app-pub-3940256099942544/2247696110",
+  "inter_splash_uninstall": {
+    "id": "ca-app-pub-3940256099942544/1033173712",
     "isEnable": true,
-    "colorCTA": "default",
-    "heightCTA": 45,
-    "positionCTA": "BOTTOM",
-    "components": ["media", "icon_headline","body","cta"],
-    "enable_ua_check": true
+    "scenario": "Interstitial Ads are shown on the Splash screen when the user uninstalls the app from the widget.",
+    "enable_ua_check": false
   },
-  "native_permission": {
+  "banner_splash_uninstall": {
+    "id": "ca-app-pub-3940256099942544/9214589741",
+    "isEnable": true,
+    "scenario": "Banner Ads are shown on the Splash screen when the user uninstalls the app from the widget.",
+    "reloadIntervalSeconds": 30,
+    "enable_ua_check": false
+  },
+  "native_uninstall": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Large Native Ads are shown on the Confirm Uninstall screen.",
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
     "components": ["icon_headline", "body", "media", "cta"],
     "enable_ua_check": false
   },
-  "native_home": {
+  "native_survey_uninstall": {
     "id": "ca-app-pub-3940256099942544/2247696110",
     "isEnable": true,
+    "scenario": "Large Native Ads are shown on the Survey screen.",
+    "colorCTA": "default",
+    "heightCTA": 45,
+    "positionCTA": "BOTTOM",
+    "components": ["icon_headline", "body", "media", "cta"],
+    "enable_ua_check": false
+  },
+  "open_resume": {
+    "id": "ca-app-pub-3940256099942544/9257395921",
+    "isEnable": false,
+    "enable_ua_check": false
+  },
+  "native_welcome": {
+    "id": "ca-app-pub-3940256099942544/2247696110",
+    "isEnable": false,
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
@@ -154,50 +167,36 @@
   },
   "inter_onboarding": {
     "id": "ca-app-pub-3940256099942544/1033173712",
-    "isEnable": true,
+    "isEnable": false,
     "enable_ua_check": true
   },
   "banner_home": {
     "id": "ca-app-pub-3940256099942544/9214589741",
-    "isEnable": true,
+    "isEnable": false,
     "reloadIntervalSeconds": 30,
     "enable_ua_check": false
   },
-  "native_survey": {
+  "native_home": {
     "id": "ca-app-pub-3940256099942544/2247696110",
-    "isEnable": true,
+    "isEnable": false,
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
     "components": ["icon_headline", "body", "media", "cta"],
     "enable_ua_check": false
   },
-  "native_confirm_uninstall": {
+  "native_permission": {
     "id": "ca-app-pub-3940256099942544/2247696110",
-    "isEnable": true,
+    "isEnable": false,
     "colorCTA": "default",
     "heightCTA": 45,
     "positionCTA": "BOTTOM",
     "components": ["icon_headline", "body", "media", "cta"],
-    "enable_ua_check": false
-  },
-  "native_welcome": {
-    "id": "ca-app-pub-3940256099942544/2247696110",
-    "isEnable": true,
-    "colorCTA": "default",
-    "heightCTA": 45,
-    "positionCTA": "BOTTOM",
-    "components": ["icon_headline", "body", "media", "cta"],
-    "enable_ua_check": false
-  },
-  "inter_welcome": {
-    "id": "ca-app-pub-3940256099942544/1033173712",
-    "isEnable": true,
     "enable_ua_check": false
   },
   "reward_example": {
     "id": "ca-app-pub-3940256099942544/5224354917",
-    "isEnable": true,
+    "isEnable": false,
     "enable_ua_check": false
   }
 }

@@ -33,7 +33,25 @@ data class AdRemoteConfig(
         fun initialize(context: Context, json: String? = null) {
             synchronized(this) {
                 instance = if (BuildConfig.DEBUG) {
-                    fromAssets(context, DEBUG_FILE_NAME)
+                    val debugConfig = fromAssets(context, DEBUG_FILE_NAME)
+                    if (!json.isNullOrBlank()) {
+                        try {
+                            val remoteConfig = fromJson(json)
+                            val merged = debugConfig.ads.mapValues { (key, debugUnit) ->
+                                val remoteUnit = remoteConfig.ads[key]
+                                if (remoteUnit != null) {
+                                    remoteUnit.copy(id = debugUnit.id)
+                                } else {
+                                    debugUnit
+                                }
+                            }
+                            AdRemoteConfig(ads = merged)
+                        } catch (_: Exception) {
+                            debugConfig
+                        }
+                    } else {
+                        debugConfig
+                    }
                 } else {
                     fromJsonOrAssets(context, json, RELEASE_FILE_NAME)
                 }
@@ -126,6 +144,13 @@ data class AdRemoteConfig(
         return adUnitConfig
     }
 
+    private fun getAdUnitWithFallback(primaryKey: String, fallbackKey: String): AdUnitConfig {
+        ads[primaryKey]?.let { return it }
+        ads[fallbackKey]?.let { return it }
+        Timber.w("Ad unit '%s' (or fallback '%s') not found in configuration.", primaryKey, fallbackKey)
+        return AdUnitConfig(id = "", isEnable = false)
+    }
+
     val inter_splash: AdUnitConfig
         get() = getAdUnit("inter_splash")
 
@@ -165,11 +190,17 @@ data class AdRemoteConfig(
     val native_onboarding_2_4: AdUnitConfig
         get() = getAdUnit("native_onboarding_2_4")
 
+    val native_onboarding_fullscreen_1_2: AdUnitConfig
+        get() = getAdUnitWithFallback("native_onboarding_fullscreen_1_2", "native_onboarding_fullscreen_1_3")
+
+    val native_onboarding_fullscreen_2_2: AdUnitConfig
+        get() = getAdUnitWithFallback("native_onboarding_fullscreen_2_2", "native_onboarding_fullscreen_2_3")
+
     val native_onboarding_fullscreen_1_3: AdUnitConfig
-        get() = getAdUnit("native_onboarding_fullscreen_1_3")
+        get() = native_onboarding_fullscreen_1_2
 
     val native_onboarding_fullscreen_2_3: AdUnitConfig
-        get() = getAdUnit("native_onboarding_fullscreen_2_3")
+        get() = native_onboarding_fullscreen_2_2
 
     val native_onboarding_fullscreen_1_4: AdUnitConfig
         get() = getAdUnit("native_onboarding_fullscreen_1_4")
@@ -186,21 +217,29 @@ data class AdRemoteConfig(
     val inter_onboarding: AdUnitConfig
         get() = getAdUnit("inter_onboarding")
 
-
     val banner_home: AdUnitConfig
         get() = getAdUnit("banner_home")
 
+    val native_survey_uninstall: AdUnitConfig
+        get() = getAdUnitWithFallback("native_survey_uninstall", "native_survey")
+
     val native_survey: AdUnitConfig
-        get() = getAdUnit("native_survey")
+        get() = native_survey_uninstall
+
+    val native_uninstall: AdUnitConfig
+        get() = getAdUnitWithFallback("native_uninstall", "native_confirm_uninstall")
 
     val native_confirm_uninstall: AdUnitConfig
-        get() = getAdUnit("native_confirm_uninstall")
+        get() = native_uninstall
 
     val native_welcome: AdUnitConfig
         get() = getAdUnit("native_welcome")
 
+    val inter_welcome_back: AdUnitConfig
+        get() = getAdUnitWithFallback("inter_welcome_back", "inter_welcome")
+
     val inter_welcome: AdUnitConfig
-        get() = getAdUnit("inter_welcome")
+        get() = inter_welcome_back
 
     val reward_example: AdUnitConfig
         get() = getAdUnit("reward_example")

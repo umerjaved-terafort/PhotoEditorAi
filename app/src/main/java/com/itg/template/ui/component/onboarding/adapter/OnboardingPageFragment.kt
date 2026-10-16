@@ -1,5 +1,6 @@
 package com.itg.template.ui.component.onboarding.adapter
 
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
@@ -47,6 +48,8 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
         updateLayout()
         if (onboardingItem.isHasNativeFull) {
             mBinding.layoutAdsFull.visibleView()
+            mBinding.imgCloseAdsFull.visibleView()
+            mBinding.layoutContent.invisibleView()
         } else {
             mBinding.layoutAdsFull.invisibleView()
         }
@@ -132,7 +135,14 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
             2 -> mBinding.imgIndicator2.setImageResource(R.drawable.ic_onboarding_indicator_selected)
             3 -> mBinding.imgIndicator3.setImageResource(R.drawable.ic_onboarding_indicator_selected)
         }
+        applyHeroHeight(onboardingItem.positionIndicator)
         applyPageOverlays(onboardingItem.positionIndicator)
+    }
+
+    private fun applyHeroHeight(page: Int) {
+        val params = mBinding.heroFrame.layoutParams as ConstraintLayout.LayoutParams
+        params.matchConstraintPercentHeight = if (page == 1 || page == 2) 0.616f else 0.445f
+        mBinding.heroFrame.layoutParams = params
     }
 
     private fun applyPageOverlays(page: Int) {

@@ -54,6 +54,7 @@ class AdRemoteConfigJsonAdapterFactory : JsonAdapter.Factory {
                 var heightCTA = 45
                 var positionCTA = "BOTTOM"
                 var components: List<String> = listOf("icon_headline", "body", "media", "cta")
+                var scenario = ""
                 reader.beginObject()
                 while (reader.hasNext()) {
                     when (reader.nextName()) {
@@ -65,6 +66,7 @@ class AdRemoteConfigJsonAdapterFactory : JsonAdapter.Factory {
                         "heightCTA" -> heightCTA = readHeightValue(reader)
                         "positionCTA" -> positionCTA = safeNextString(reader, "BOTTOM").uppercase(Locale.US)
                         "components" -> components = readComponentsList(reader)
+                        "scenario" -> scenario = safeNextString(reader, "")
                         else -> reader.skipValue()
                     }
                 }
@@ -77,7 +79,8 @@ class AdRemoteConfigJsonAdapterFactory : JsonAdapter.Factory {
                     colorCTA = colorCTA,
                     heightCTA = heightCTA,
                     positionCTA = positionCTA,
-                    components = components
+                    components = components,
+                    scenario = scenario
                 )
             }
 

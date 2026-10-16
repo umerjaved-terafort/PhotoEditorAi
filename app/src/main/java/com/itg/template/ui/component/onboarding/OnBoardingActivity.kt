@@ -9,7 +9,8 @@ import com.itg.template.R
 import com.itg.template.ads.AdRemoteConfig
 import com.itg.template.ads.AdsManager
 import com.itg.template.ads.RemoteConfigUtils
-import com.itg.template.ads.native_onboarding_fullscreen_1_3
+import com.itg.template.ads.native_onboarding_fullscreen_1_2
+import com.itg.template.ads.native_onboarding_fullscreen_2_2
 import com.itg.template.data.event.EventTracking
 import com.itg.template.databinding.ActivityOnboardingBinding
 import com.itg.template.ui.bases.BaseActivity
@@ -117,6 +118,22 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
                 positionIndicator = 1
             )
         )
+
+        val fullConfig = if (appSharedPref.firstOnBoarding) {
+            AdRemoteConfig.native_onboarding_fullscreen_1_2
+        } else {
+            AdRemoteConfig.native_onboarding_fullscreen_2_2
+        }
+        if (fullConfig.isEnable && isNetwork(this@OnBoardingActivity) &&
+            ERainAd.getInstance().getShouldDisplayNativeOnboardingFull1(fullConfig.enableUaCheck)
+        ) {
+            onboardingItems.add(
+                OnboardingItem(
+                    isHasNativeFull = true
+                )
+            )
+        }
+
         onboardingItems.add(
             OnboardingItem(
                 title = R.string.onboarding_title_3,
@@ -126,15 +143,6 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
                 positionIndicator = 2,
             )
         )
-
-        if (isNetwork(this@OnBoardingActivity) && ERainAd.getInstance().getShouldDisplayNativeOnboardingFull1(
-                AdRemoteConfig.native_onboarding_fullscreen_1_3.enableUaCheck))
-            onboardingItems.add(
-                OnboardingItem(
-                    isHasNativeFull = true
-                )
-            )
-
 
         onboardingItems.add(
             OnboardingItem(

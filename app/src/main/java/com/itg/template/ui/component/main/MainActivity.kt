@@ -462,7 +462,7 @@ class MainActivity : BaseActivityWithBanner<ActivityMainBinding>() {
 
             val openResumeConfig = updatedAds["open_resume"]
             val nativeWelcomeConfig = updatedAds["native_welcome"]
-            val interWelcomeConfig = updatedAds["inter_welcome"]
+            val interWelcomeConfig = updatedAds["inter_welcome_back"] ?: updatedAds["inter_welcome"]
 
             if (openResumeConfig != null) {
                 updatedAds["open_resume"] = openResumeConfig.copy(isEnable = (mode == ResumeAdsEntryMode.OPEN_RESUME))
@@ -471,7 +471,7 @@ class MainActivity : BaseActivityWithBanner<ActivityMainBinding>() {
                 updatedAds["native_welcome"] = nativeWelcomeConfig.copy(isEnable = (mode == ResumeAdsEntryMode.WELCOME))
             }
             if (interWelcomeConfig != null) {
-                updatedAds["inter_welcome"] = interWelcomeConfig.copy(isEnable = (mode == ResumeAdsEntryMode.WELCOME))
+                updatedAds["inter_welcome_back"] = interWelcomeConfig.copy(isEnable = (mode == ResumeAdsEntryMode.WELCOME))
             }
 
             AdRemoteConfig.updateInstance(instance.copy(ads = updatedAds))

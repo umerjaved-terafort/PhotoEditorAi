@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">AIPhoto</string>
+    <string name="app_name" translatable="false">AI Photo: Photo &amp; Video Maker</string>
     <string name="language" translatable="false">Select Language</string>
     <string name="ads_are_about_to_be_shown">This action may contain advertising</string>
     <string name="splash_tagline">Create Magic in One Tap</string>

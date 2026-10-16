@@ -2,6 +2,8 @@ package com.itg.template.ui.component.uninstall
 
 import android.content.Intent
 import android.provider.Settings
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import com.ads.module.ads.wrapper.ApNativeAd
 import com.itg.template.R
@@ -22,7 +24,34 @@ class SurveyActivity : BaseActivity<ActivitySurveyBinding>() {
 
     override fun initViews() {
         super.initViews()
-        AdsManager.loadNativeSurvey(this, R.layout.layout_native_ad_medium)
+        bindSurveyRadios()
+        AdsManager.loadNativeSurvey(this, R.layout.layout_native_ad_large)
+    }
+
+    private fun bindSurveyRadios() {
+        val radios = listOf(
+            mBinding.rbFeature,
+            mBinding.rbAds,
+            mBinding.rbDontNeed,
+            mBinding.rbOther
+        )
+        val update = {
+            radios.forEach { radio ->
+                val selected = radio.isChecked
+                radio.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (selected) R.color.color_brand else R.color.color_brand_text
+                    )
+                )
+                radio.typeface = ResourcesCompat.getFont(
+                    this,
+                    if (selected) R.font.bold else R.font.medium
+                )
+            }
+        }
+        mBinding.radioGroup.setOnCheckedChangeListener { _, _ -> update() }
+        update()
     }
 
     override fun observerData() {

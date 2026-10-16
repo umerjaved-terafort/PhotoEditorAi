@@ -5,41 +5,155 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_splash_gradient">
+        android:background="@drawable/bg_splash_gradient"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/img_splash"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/txtAds"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHeroStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.154" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHeroEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.846" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHeroTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.057" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gHeroBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.472" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gRingStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.064" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gRingEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.936" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gRingTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.043" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard1Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.0" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard1Top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.488" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard2Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.236" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard2Top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.443" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard3Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.503" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard3Top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.455" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard4Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.764" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gCard4Top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.422" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gTitleTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.678" />
 
             <View
                 android:id="@+id/dashRing"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/bg_dashed_ring"
-                app:layout_constraintBottom_toBottomOf="@id/imgHero"
+                app:layout_constraintBottom_toTopOf="@id/gHeroBottom"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@id/imgHero"
-                app:layout_constraintStart_toStartOf="@id/imgHero"
-                app:layout_constraintTop_toTopOf="@id/imgHero"
-                app:layout_constraintWidth_percent="0.92" />
+                app:layout_constraintEnd_toStartOf="@id/gRingEnd"
+                app:layout_constraintStart_toStartOf="@id/gRingStart"
+                app:layout_constraintTop_toTopOf="@id/gRingTop" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgHero"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:elevation="6dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_splash_hero"
-                app:layout_constraintDimensionRatio="270:350"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.69"
+                app:layout_constraintBottom_toTopOf="@id/gHeroBottom"
+                app:layout_constraintEnd_toStartOf="@id/gHeroEnd"
+                app:layout_constraintStart_toStartOf="@id/gHeroStart"
+                app:layout_constraintTop_toTopOf="@id/gHeroTop"
                 app:shapeAppearanceOverlay="@style/PicsGenHeroShape"
                 app:strokeColor="#00000000" />
 
@@ -47,13 +161,14 @@
                 android:id="@+id/card1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="-4dp"
+                android:layout_marginStart="-6dp"
+                android:elevation="10dp"
                 android:rotation="-8"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
                 app:layout_constraintDimensionRatio="96:136"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgHero"
+                app:layout_constraintStart_toStartOf="@id/gCard1Start"
+                app:layout_constraintTop_toTopOf="@id/gCard1Top"
                 app:layout_constraintWidth_percent="0.246"
                 app:strokeColor="@color/white"
                 app:strokeWidth="3dp">
@@ -70,14 +185,13 @@
                 android:id="@+id/card2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="-18dp"
+                android:elevation="12dp"
                 android:rotation="-3"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="10dp"
                 app:layout_constraintDimensionRatio="96:136"
-                app:layout_constraintStart_toEndOf="@id/card1"
-                app:layout_constraintTop_toBottomOf="@id/imgHero"
+                app:layout_constraintStart_toStartOf="@id/gCard2Start"
+                app:layout_constraintTop_toTopOf="@id/gCard2Top"
                 app:layout_constraintWidth_percent="0.246"
                 app:strokeColor="@color/white"
                 app:strokeWidth="3dp">
@@ -94,14 +208,13 @@
                 android:id="@+id/card3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="-12dp"
+                android:elevation="12dp"
                 android:rotation="3"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="10dp"
                 app:layout_constraintDimensionRatio="96:136"
-                app:layout_constraintStart_toEndOf="@id/card2"
-                app:layout_constraintTop_toBottomOf="@id/imgHero"
+                app:layout_constraintStart_toStartOf="@id/gCard3Start"
+                app:layout_constraintTop_toTopOf="@id/gCard3Top"
                 app:layout_constraintWidth_percent="0.246"
                 app:strokeColor="@color/white"
                 app:strokeWidth="3dp">
@@ -118,14 +231,13 @@
                 android:id="@+id/card4"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="-28dp"
+                android:elevation="10dp"
                 android:rotation="7"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
                 app:layout_constraintDimensionRatio="96:136"
-                app:layout_constraintStart_toEndOf="@id/card3"
-                app:layout_constraintTop_toBottomOf="@id/imgHero"
+                app:layout_constraintStart_toStartOf="@id/gCard4Start"
+                app:layout_constraintTop_toTopOf="@id/gCard4Top"
                 app:layout_constraintWidth_percent="0.246"
                 app:strokeColor="@color/white"
                 app:strokeWidth="3dp">
@@ -142,18 +254,18 @@
                 android:id="@+id/tvBrand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card2">
+                app:layout_constraintTop_toTopOf="@id/gTitleTop">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
                     android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
                     android:text="@string/brand_ai"
                     android:textColor="@color/color_brand_text"
                     android:textSize="32sp" />
@@ -163,6 +275,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
                     android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
                     android:text="@string/brand_photo"
                     android:textColor="@color/color_brand"
                     android:textSize="32sp" />
@@ -181,6 +294,60 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvBrand" />
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sparkle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="92dp" />
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:alpha="0.8"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sparkle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="130dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sparkle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="42dp"
+                android:layout_marginTop="228dp" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sparkle"
+                app:tint="#B48CFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="528dp" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:alpha="0.8"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sparkle"
+                app:tint="#B48CFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="56dp"
+                android:layout_marginTop="500dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.media3.ui.PlayerView

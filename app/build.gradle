@@ -12,7 +12,7 @@ android {
     compileSdk compile_sdk_version
 
     defaultConfig {
-        applicationId "com.itg.template"
+        applicationId "com.ai.photo.photo.and.video.maker"
         minSdkVersion min_sdk_version
         targetSdk target_sdk_version
         versionCode 100

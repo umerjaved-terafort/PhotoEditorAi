@@ -128,7 +128,7 @@ object AdsManager {
 
     fun loadNativeOnboardingFull(activity: Activity, isFirst: Boolean, layoutRes: Int) {
         val config =
-            if (isFirst) AdRemoteConfig.native_onboarding_fullscreen_1_3 else AdRemoteConfig.native_onboarding_fullscreen_2_3
+            if (isFirst) AdRemoteConfig.native_onboarding_fullscreen_1_2 else AdRemoteConfig.native_onboarding_fullscreen_2_2
         loadNativeInternal(
             activity,
             config,
@@ -174,20 +174,20 @@ object AdsManager {
 
     fun loadNativeSurvey(activity: Activity, layoutRes: Int) {
         loadNativeInternal(
-            activity, AdRemoteConfig.native_survey, layoutRes, nativeSurveyAdLive,
+            activity, AdRemoteConfig.native_survey_uninstall, layoutRes, nativeSurveyAdLive,
             ERainAd.getInstance()
-                .getShouldDisplayWidgetUninstall(AdRemoteConfig.native_survey.enableUaCheck)
+                .getShouldDisplayWidgetUninstall(AdRemoteConfig.native_survey_uninstall.enableUaCheck)
         )
     }
 
     fun loadNativeConfirmUninstall(activity: Activity, layoutRes: Int) {
         loadNativeInternal(
             activity,
-            AdRemoteConfig.native_confirm_uninstall,
+            AdRemoteConfig.native_uninstall,
             layoutRes,
             nativeConfirmUninstallAdLive,
             ERainAd.getInstance()
-                .getShouldDisplayWidgetUninstall(AdRemoteConfig.native_confirm_uninstall.enableUaCheck)
+                .getShouldDisplayWidgetUninstall(AdRemoteConfig.native_uninstall.enableUaCheck)
         )
     }
 
@@ -234,7 +234,7 @@ object AdsManager {
 
     /** Load native onboarding full for dashboard – ignores shouldDisplay */
     fun loadNativeFullForDashboard(activity: Activity, layoutRes: Int) {
-        loadNativeForDashboard(activity, "native_onboarding_fullscreen_1_3", layoutRes)
+        loadNativeForDashboard(activity, "native_onboarding_fullscreen_1_2", layoutRes)
     }
 
     fun loadInterOnboarding(context: Context, ignoreLimit: Boolean = false) {
@@ -274,7 +274,7 @@ object AdsManager {
         fun emit(ad: ApInterstitialAd?) {
             request.value = ad
         }
-        val config = AdRemoteConfig.inter_welcome
+        val config = AdRemoteConfig.inter_welcome_back
         if (!config.isEnable
             || AppPurchase.getInstance().isPurchased(context)
             || (!ignoreLimit && !ERainAd.getInstance()
@@ -305,7 +305,7 @@ object AdsManager {
     fun showInterWelcome(context: Context, ignoreLimit: Boolean = false, onAction: () -> Unit) {
         val interstitial = interWelcomeAdLive.value
         val allowShow = ignoreLimit || ERainAd.getInstance()
-            .getShouldDisplayInterWelcomeBack(AdRemoteConfig.inter_welcome.enableUaCheck)
+            .getShouldDisplayInterWelcomeBack(AdRemoteConfig.inter_welcome_back.enableUaCheck)
         if (interstitial != null && interstitial.isReady && !AppPurchase.getInstance()
                 .isPurchased(context) && allowShow
         ) {

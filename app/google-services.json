@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1092846127014",
-    "project_id": "itg-template-android",
-    "storage_bucket": "itg-template-android.firebasestorage.app"
+    "project_number": "786390459539",
+    "project_id": "pa-ter-3-ai-photo",
+    "storage_bucket": "pa-ter-3-ai-photo.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1092846127014:android:cc687989e1797c4552f167",
+        "mobilesdk_app_id": "1:786390459539:android:d3e7b206e1882aa0f91966",
         "android_client_info": {
-          "package_name": "com.itg.template"
+          "package_name": "com.ai.photo.photo.and.video.maker"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBaxagNN4O9GBodsZrf5_WQbDbGcve3MWQ"
+          "current_key": "AIzaSyCXpmwDOzwU_JNO-GmUkBO8Gs86P0nAsqY"
         }
       ],
       "services": {

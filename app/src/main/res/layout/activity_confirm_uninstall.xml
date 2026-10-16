@@ -2,126 +2,118 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
+    <data></data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_splash_gradient">
+        android:background="@drawable/bg_splash_gradient"
+        android:paddingHorizontal="20dp">
 
-        <RelativeLayout
-            android:id="@+id/rlTop"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_Back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:padding="@dimen/_4sdp"
-                android:src="@drawable/ic_back"
-                app:tint="@color/textPrimary" />
-        </RelativeLayout>
-
-        <FrameLayout
-            android:id="@+id/iconBrand"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/bg_brand_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlTop">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_photo_spark" />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/tvTitle"
-            style="@style/text_bold"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_22sdp"
-            android:layout_marginTop="@dimen/_18sdp"
-            android:gravity="center"
-            android:lineSpacingExtra="4dp"
-            android:text="@string/uninstall_retain_title"
-            android:textColor="@color/textPrimary"
-            android:textSize="19sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iconBrand" />
-
-        <TextView
-            android:id="@+id/tvSubtitle"
-            style="@style/text_regular_12"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_24sdp"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:lineSpacingExtra="2dp"
-            android:text="@string/uninstall_retain_subtitle"
-            android:textColor="@color/color_muted"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
-
-        <TextView
-            android:id="@+id/btnTryAgain"
-            style="@style/text_medium_14"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginHorizontal="@dimen/_22sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/bg_btn_primary"
-            android:gravity="center"
-            android:text="@string/try_again"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
-
-        <TextView
-            android:id="@+id/btnStillUninstall"
-            style="@style/text_medium_14"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginHorizontal="@dimen/_22sdp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_Back"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_btn_outline"
+            android:padding="11dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_brand_text" />
+
+        <LinearLayout
+            android:id="@+id/contentBlock"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/still_want_to_uninstall"
-            android:textColor="@color/textPrimary"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@id/fr_ads"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnTryAgain" />
+            app:layout_constraintTop_toBottomOf="@id/img_Back">
+
+            <FrameLayout
+                android:id="@+id/iconBrand"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_brand_icon"
+                android:elevation="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_photo_spark" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingMultiplier="1.35"
+                android:text="@string/uninstall_retain_title"
+                android:textColor="@color/color_brand_text"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingMultiplier="1.5"
+                android:text="@string/uninstall_retain_subtitle"
+                android:textColor="@color/color_muted"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/btnTryAgain"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/bg_btn_primary"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/try_again"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btnStillUninstall"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_btn_outline"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/still_want_to_uninstall"
+                android:textColor="@color/color_brand_text"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/fr_ads"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
             android:layout_marginBottom="8dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <include
                 android:id="@+id/shimmer_ads"
-                layout="@layout/layout_shimmer_native_medium" />
-
+                layout="@layout/layout_shimmer_native_large" />
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

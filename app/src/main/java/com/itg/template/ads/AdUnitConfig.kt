@@ -10,5 +10,6 @@ data class AdUnitConfig(
     val colorCTA: String = "default",
     val heightCTA: Int = 45,
     val positionCTA: String = "BOTTOM",
-    val components: List<String> = listOf("icon_headline", "body", "media", "cta")
+    val components: List<String> = listOf("icon_headline", "body", "media", "cta"),
+    val scenario: String = ""
 )

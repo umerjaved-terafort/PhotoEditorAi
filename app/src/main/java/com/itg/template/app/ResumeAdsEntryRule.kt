@@ -1,7 +1,7 @@
 package com.itg.template.app
 
 import com.itg.template.ads.AdRemoteConfig
-import com.itg.template.ads.inter_welcome
+import com.itg.template.ads.inter_welcome_back
 import com.itg.template.ads.native_welcome
 import com.itg.template.ads.open_resume
 
@@ -18,7 +18,7 @@ object ResumeAdsEntryRule {
         val canUseOpenResume = AdRemoteConfig.open_resume.isEnable
         if (canUseOpenResume) return ResumeAdsEntryMode.OPEN_RESUME
 
-        val canUseWelcome = AdRemoteConfig.native_welcome.isEnable && AdRemoteConfig.inter_welcome.isEnable
+        val canUseWelcome = AdRemoteConfig.inter_welcome_back.isEnable || AdRemoteConfig.native_welcome.isEnable
         return if (canUseWelcome) ResumeAdsEntryMode.WELCOME else ResumeAdsEntryMode.NONE
     }
 
