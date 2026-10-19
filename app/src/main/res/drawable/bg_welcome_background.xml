@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Welcome screen background: soft lavender linear gradient + 4 radial glows
+     (design: radial-gradient at 12%/6%, 95%/34%, 8%/96%, 96%/92% of a 390x844 frame). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="@color/welcome_bg_bottom"
+                android:startColor="@color/welcome_bg_top" />
+        </shape>
+    </item>
+    <!-- bottom-right glow: center (374, 776), r 301 -->
+    <item
+        android:width="602dp"
+        android:height="602dp"
+        android:bottom="-233dp"
+        android:gravity="bottom|end"
+        android:right="-285dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/welcome_glow_4_clear"
+                android:gradientRadius="50%"
+                android:startColor="@color/welcome_glow_4"
+                android:type="radial" />
+        </shape>
+    </item>
+    <!-- bottom-left glow: center (31, 810), r 399 -->
+    <item
+        android:width="798dp"
+        android:height="798dp"
+        android:bottom="-365dp"
+        android:gravity="bottom|start"
+        android:left="-368dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/welcome_glow_3_clear"
+                android:gradientRadius="50%"
+                android:startColor="@color/welcome_glow_3"
+                android:type="radial" />
+        </shape>
+    </item>
+    <!-- right-middle pink glow: center (370, 287), r 254 -->
+    <item
+        android:width="508dp"
+        android:height="508dp"
+        android:gravity="top|end"
+        android:right="-234dp"
+        android:top="33dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/welcome_glow_2_clear"
+                android:gradientRadius="50%"
+                android:startColor="@color/welcome_glow_2"
+                android:type="radial" />
+        </shape>
+    </item>
+    <!-- top-left glow: center (47, 51), r 363 -->
+    <item
+        android:width="726dp"
+        android:height="726dp"
+        android:gravity="top|start"
+        android:left="-316dp"
+        android:top="-312dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/welcome_glow_1_clear"
+                android:gradientRadius="50%"
+                android:startColor="@color/welcome_glow_1"
+                android:type="radial" />
+        </shape>
+    </item>
+</layer-list>

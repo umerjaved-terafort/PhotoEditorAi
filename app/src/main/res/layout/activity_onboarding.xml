@@ -9,19 +9,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_splash_gradient">
-
-        <!-- Preview -->
-        <include
-            layout="@layout/fragment_onboarding"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible" />
+        android:background="@drawable/bg_onb_page_gradient">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/fragment_onboarding_page" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

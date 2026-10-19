@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash background: linear base + 4 soft radial glows (design: Splash.html) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="#FDF7FC"
+                android:startColor="#F9F4FF" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.12"
+                android:centerY="0.06"
+                android:endColor="#00E9DBFF"
+                android:gradientRadius="363dp"
+                android:startColor="#E9DBFF"
+                android:type="radial" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.95"
+                android:centerY="0.34"
+                android:endColor="#00FBDDF0"
+                android:gradientRadius="254dp"
+                android:startColor="#FBDDF0"
+                android:type="radial" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.08"
+                android:centerY="0.96"
+                android:endColor="#00E4D3FF"
+                android:gradientRadius="399dp"
+                android:startColor="#E4D3FF"
+                android:type="radial" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.96"
+                android:centerY="0.92"
+                android:endColor="#00F6DDF5"
+                android:gradientRadius="301dp"
+                android:startColor="#F6DDF5"
+                android:type="radial" />
+        </shape>
+    </item>
+</layer-list>

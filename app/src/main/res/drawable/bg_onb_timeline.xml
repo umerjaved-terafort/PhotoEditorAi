@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Intro 2 video timeline bar: rgba(255,255,255,.92), radius 16 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/onb_white_92" />
+    <corners android:radius="16dp" />
+</shape>

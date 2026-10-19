@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="uninst_retain_subtitle">Don’t miss trending templates, HD photos and AI videos, all in one app.</string>
+    <color name="uninst_brand_shadow">#4D7B2FF7</color>
+    <color name="uninst_pink_shadow">#59F72FA8</color>
+</resources>

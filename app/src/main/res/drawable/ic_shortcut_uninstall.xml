@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher shortcut icon (API 25 fallback; API 26+ uses drawable-anydpi-v26 adaptive icon). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <path
+        android:fillColor="@color/shortcut_tile_uninstall"
+        android:pathData="M10,0h12a10,10 0,0 1,10 10v12a10,10 0,0 1,-10 10h-12a10,10 0,0 1,-10 -10v-12a10,10 0,0 1,10 -10z" />
+    <path
+        android:pathData="M10.75,0.75h10.5a10,10 0,0 1,10 10v10.5a10,10 0,0 1,-10 10h-10.5a10,10 0,0 1,-10 -10v-10.5a10,10 0,0 1,10 -10z"
+        android:strokeWidth="1.5"
+        android:strokeColor="@color/shortcut_tile_uninstall_stroke" />
+    <group
+        android:scaleX="0.7083"
+        android:scaleY="0.7083"
+        android:translateX="7.5"
+        android:translateY="7.5">
+        <path
+            android:pathData="M3,6h18"
+            android:strokeWidth="1.9"
+            android:strokeColor="@color/color_brand"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M8,6V4h8v2"
+            android:strokeWidth="1.9"
+            android:strokeColor="@color/color_brand"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M6,6l1,14h10l1,-14"
+            android:strokeWidth="1.9"
+            android:strokeColor="@color/color_brand"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M10,11v5"
+            android:strokeWidth="1.9"
+            android:strokeColor="@color/color_brand"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M14,11v5"
+            android:strokeWidth="1.9"
+            android:strokeColor="@color/color_brand"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+    </group>
+</vector>

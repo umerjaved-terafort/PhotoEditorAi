@@ -1,7 +1,15 @@
 package com.itg.template.ui.component.onboarding.adapter
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
+import android.util.TypedValue
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
+import androidx.core.view.doOnLayout
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import com.ads.module.ads.wrapper.ApNativeAd
@@ -139,10 +147,25 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
         applyPageOverlays(onboardingItem.positionIndicator)
     }
 
+    /**
+     * Design hero heights (below the status bar): 344/778 for Intro 1 & 4, 488/778 for Intro 2 & 3.
+     * Percent is relative to the full page so the ad card below doesn't shrink the hero.
+     */
     private fun applyHeroHeight(page: Int) {
-        val params = mBinding.heroFrame.layoutParams as ConstraintLayout.LayoutParams
-        params.matchConstraintPercentHeight = if (page == 1 || page == 2) 0.616f else 0.445f
-        mBinding.heroFrame.layoutParams = params
+        mBinding.heroFrame.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            matchConstraintPercentHeight = if (page == 1 || page == 2) 0.62f else 0.44f
+        }
+        mBinding.heroFrame.setBackgroundResource(
+            when (page) {
+                1 -> R.drawable.bg_onb_hero_pink
+                2 -> 0
+                else -> R.drawable.bg_onb_hero_lilac
+            }
+        )
+        // Intro 4 title sits 26dp below the hero, others 28dp.
+        mBinding.tvTitle.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            topMargin = dp(if (page == 3) 26f else 28f)
+        }
     }
 
     private fun applyPageOverlays(page: Int) {
@@ -152,6 +175,7 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
         mBinding.overlayTimeline.goneView()
         mBinding.overlayBeforeDim.goneView()
         mBinding.overlayDivider.goneView()
+        mBinding.overlayCompare.goneView()
         mBinding.tvBefore.goneView()
         mBinding.tvAfter.goneView()
         mBinding.overlayThumbs.goneView()
@@ -159,34 +183,74 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
 
         when (page) {
             0 -> {
-                mBinding.tvBadge.text = "AI Templates"
-                mBinding.chip1.text = "Anime"
-                mBinding.chip2.text = "Oil Paint"
-                mBinding.chip3.text = "3D Cartoon"
+                mBinding.imgBadgeIcon.setImageResource(R.drawable.ic_onb_badge_sparkle)
+                mBinding.tvBadge.setText(R.string.onb_badge_ai_templates)
+                mBinding.chip1.setText(R.string.onb_chip_anime)
+                mBinding.chip2.setText(R.string.onb_chip_oil_paint)
+                mBinding.chip3.setText(R.string.onb_chip_3d_cartoon)
+                setChipsHorizontalBias(0f)
                 mBinding.overlayOriginal.visibleView()
                 mBinding.overlayChips.visibleView()
             }
             1 -> {
-                mBinding.tvBadge.text = "Image → Video"
+                mBinding.imgBadgeIcon.setImageResource(R.drawable.ic_onb_badge_video)
+                mBinding.tvBadge.setText(R.string.onb_badge_image_to_video)
                 mBinding.overlayPlay.visibleView()
                 mBinding.overlayTimeline.visibleView()
             }
             2 -> {
-                mBinding.tvBadge.text = "Upscale to HD"
+                mBinding.imgBadgeIcon.setImageResource(R.drawable.ic_onb_badge_upscale)
+                mBinding.tvBadge.setText(R.string.onb_badge_upscale_hd)
                 mBinding.overlayBeforeDim.visibleView()
                 mBinding.overlayDivider.visibleView()
+                mBinding.overlayCompare.visibleView()
                 mBinding.tvBefore.visibleView()
                 mBinding.tvAfter.visibleView()
+                setupBeforeHalf()
             }
             3 -> {
-                mBinding.tvBadge.text = "Toonify & Effects"
-                mBinding.chip1.text = "Toonify"
-                mBinding.chip2.text = "Hair Colour"
-                mBinding.chip3.text = "Trending"
+                // Intro 4 has no top badge in the design.
+                mBinding.overlayBadge.goneView()
+                mBinding.chip1.setText(R.string.onb_chip_toonify)
+                mBinding.chip2.setText(R.string.onb_chip_hair_colour)
+                mBinding.chip3.setText(R.string.onb_chip_trending)
+                setChipsHorizontalBias(0.5f)
                 mBinding.overlayThumbs.visibleView()
                 mBinding.overlayChips.visibleView()
             }
             else -> mBinding.overlayBadge.goneView()
         }
     }
+
+    private fun setChipsHorizontalBias(bias: Float) {
+        mBinding.overlayChips.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            horizontalBias = bias
+        }
+    }
+
+    /**
+     * Intro 3 "before" half: same hero image, blurred (API 31+) and desaturated, clipped to the
+     * left of the divider. The inner image is sized to the full hero so it lines up with the "after" image.
+     */
+    private fun setupBeforeHalf() {
+        val before = mBinding.imgBeforeBlur
+        Glide.with(this).load(onboardingItem.imageResId).into(before)
+        before.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply {
+            setSaturation(0.7f)
+            postConcat(ColorMatrix().apply { setScale(0.95f, 0.95f, 0.95f, 1f) })
+        })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val radius = dp(4f).toFloat()
+            before.setRenderEffect(RenderEffect.createBlurEffect(radius, radius, Shader.TileMode.CLAMP))
+        }
+        mBinding.heroFrame.doOnLayout { hero ->
+            before.updateLayoutParams {
+                width = hero.width
+                height = hero.height
+            }
+        }
+    }
+
+    private fun dp(value: Float): Int =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, resources.displayMetrics).toInt()
 }

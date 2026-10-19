@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_splash_gradient"
+        android:background="@drawable/bg_splash_radial"
         android:clipChildren="false"
         android:clipToPadding="false">
 
@@ -148,6 +148,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:elevation="6dp"
+                android:outlineAmbientShadowColor="@color/color_brand"
+                android:outlineSpotShadowColor="@color/color_brand"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_splash_hero"
                 app:layout_constraintBottom_toTopOf="@id/gHeroBottom"
@@ -163,6 +165,8 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="-6dp"
                 android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/color_brand"
+                android:outlineSpotShadowColor="@color/color_brand"
                 android:rotation="-8"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
@@ -186,6 +190,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:elevation="12dp"
+                android:outlineAmbientShadowColor="@color/color_brand"
+                android:outlineSpotShadowColor="@color/color_brand"
                 android:rotation="-3"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="10dp"
@@ -209,6 +215,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:elevation="12dp"
+                android:outlineAmbientShadowColor="@color/color_brand"
+                android:outlineSpotShadowColor="@color/color_brand"
                 android:rotation="3"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="10dp"
@@ -232,6 +240,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/color_brand"
+                android:outlineSpotShadowColor="@color/color_brand"
                 android:rotation="7"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
@@ -265,7 +275,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
                     android:includeFontPadding="false"
-                    android:letterSpacing="-0.02"
+                    android:letterSpacing="-0.016"
                     android:text="@string/brand_ai"
                     android:textColor="@color/color_brand_text"
                     android:textSize="32sp" />
@@ -275,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
                     android:includeFontPadding="false"
-                    android:letterSpacing="-0.02"
+                    android:letterSpacing="-0.016"
                     android:text="@string/brand_photo"
                     android:textColor="@color/color_brand"
                     android:textSize="32sp" />
@@ -286,7 +296,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/semi_bold"
                 android:includeFontPadding="false"
                 android:text="@string/splash_tagline"
                 android:textColor="@color/color_muted"
@@ -294,16 +304,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvBrand" />
-
+            <!-- Sparkles: positioned by bias (design x/y on a 390x844 frame) so they scale with the screen -->
             <ImageView
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_sparkle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.121"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="44dp"
-                android:layout_marginTop="92dp" />
+                app:layout_constraintVertical_bias="0.112" />
 
             <ImageView
                 android:layout_width="14dp"
@@ -311,20 +323,24 @@
                 android:alpha="0.8"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_sparkle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.213"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="130dp" />
+                app:layout_constraintVertical_bias="0.157" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_sparkle"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.883"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="42dp"
-                android:layout_marginTop="228dp" />
+                app:layout_constraintVertical_bias="0.280" />
 
             <ImageView
                 android:layout_width="22dp"
@@ -332,10 +348,12 @@
                 android:contentDescription="@null"
                 android:src="@drawable/ic_sparkle"
                 app:tint="#B48CFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.207"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="76dp"
-                android:layout_marginTop="528dp" />
+                app:layout_constraintVertical_bias="0.642" />
 
             <ImageView
                 android:layout_width="16dp"
@@ -344,10 +362,26 @@
                 android:contentDescription="@null"
                 android:src="@drawable/ic_sparkle"
                 app:tint="#B48CFF"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.850"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="56dp"
-                android:layout_marginTop="500dp" />
+                app:layout_constraintVertical_bias="0.604" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:alpha="0.7"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sparkle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.079"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.829" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.media3.ui.PlayerView

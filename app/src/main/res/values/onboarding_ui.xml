@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Onboarding (Intro 1-4) design texts -->
+    <string name="onb_badge_ai_templates">AI Templates</string>
+    <string name="onb_badge_image_to_video">Image \u2192 Video</string>
+    <string name="onb_badge_upscale_hd">Upscale to HD</string>
+    <string name="onb_label_original">Original</string>
+    <string name="onb_chip_anime">Anime</string>
+    <string name="onb_chip_oil_paint">Oil Paint</string>
+    <string name="onb_chip_3d_cartoon">3D Cartoon</string>
+    <string name="onb_chip_toonify">Toonify</string>
+    <string name="onb_chip_hair_colour">Hair Colour</string>
+    <string name="onb_chip_trending">Trending</string>
+    <string name="onb_label_before">Before</string>
+    <string name="onb_label_after">After</string>
+    <string name="onb_time_start" translatable="false">0:03</string>
+    <string name="onb_time_end" translatable="false">0:08</string>
+
+    <color name="onb_indicator_inactive">#D9CBF2</color>
+    <color name="onb_badge_icon">#F72FA8</color>
+    <color name="onb_dark_pill">#B817131F</color>
+    <color name="onb_white_92">#EBFFFFFF</color>
+</resources>

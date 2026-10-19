@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data></data>
 
@@ -10,13 +11,14 @@
         android:background="@drawable/bg_splash_gradient"
         android:paddingHorizontal="20dp">
 
+        <!-- The design has no back button on this screen; view kept (gone) for the Kotlin binding. -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_Back"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:layout_marginTop="8dp"
             android:padding="11dp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/ic_uninst_back"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/color_brand_text" />
@@ -30,7 +32,7 @@
             app:layout_constraintBottom_toTopOf="@id/fr_ads"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_Back">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,17 +45,20 @@
                     android:layout_width="170dp"
                     android:layout_height="124dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="12dp">
 
                     <LinearLayout
                         android:layout_width="128dp"
                         android:layout_height="96dp"
-                        android:layout_gravity="start"
                         android:layout_marginStart="18dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/bg_survey_card"
-                        android:elevation="8dp"
-                        android:orientation="vertical">
+                        android:elevation="10dp"
+                        android:orientation="vertical"
+                        android:outlineAmbientShadowColor="@color/uninst_brand_shadow"
+                        android:outlineSpotShadowColor="@color/uninst_brand_shadow"
+                        android:padding="1.5dp"
+                        tools:targetApi="p">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -81,21 +86,21 @@
                         </LinearLayout>
 
                         <View
-                            android:layout_width="60dp"
+                            android:layout_width="63dp"
                             android:layout_height="5dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/bg_survey_line" />
 
                         <View
-                            android:layout_width="85dp"
+                            android:layout_width="89dp"
                             android:layout_height="5dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/bg_survey_line_soft" />
 
                         <View
-                            android:layout_width="40dp"
+                            android:layout_width="42dp"
                             android:layout_height="5dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="6dp"
@@ -108,43 +113,45 @@
                         android:layout_marginStart="56dp"
                         android:layout_marginTop="50dp"
                         android:background="@drawable/bg_circle_pink"
-                        android:elevation="10dp">
+                        android:elevation="12dp"
+                        android:outlineAmbientShadowColor="@color/uninst_pink_shadow"
+                        android:outlineSpotShadowColor="@color/uninst_pink_shadow"
+                        tools:targetApi="p">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_close_white" />
+                            android:src="@drawable/ic_uninst_close" />
                     </FrameLayout>
 
+                    <!-- No shadow in the design; elevation only keeps it drawn above the card. -->
                     <FrameLayout
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_gravity="end"
+                        android:layout_marginStart="132dp"
                         android:background="@drawable/bg_circle_brand"
-                        android:elevation="8dp">
+                        android:elevation="12dp"
+                        android:outlineProvider="none">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_sparkle"
-                            app:tint="@color/white" />
+                            android:src="@drawable/ic_uninst_sun" />
                     </FrameLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_gravity="start|bottom"
-                        android:layout_marginBottom="22dp"
+                        android:layout_marginTop="70dp"
                         android:src="@drawable/ic_sparkle" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:layout_gravity="end|bottom"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="154dp"
+                        android:layout_marginTop="92dp"
                         android:src="@drawable/ic_sparkle"
                         app:tint="#F72FA8" />
                 </FrameLayout>
@@ -172,9 +179,10 @@
                         android:id="@+id/rbFeature"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
                         android:background="@android:color/transparent"
-                        android:button="@drawable/bg_radio_language"
-                        android:fontFamily="@font/medium"
+                        android:button="@drawable/bg_uninst_radio"
+                        android:fontFamily="@font/semi_bold"
                         android:gravity="center_vertical"
                         android:includeFontPadding="false"
                         android:minHeight="46dp"
@@ -187,8 +195,9 @@
                         android:id="@+id/rbAds"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
                         android:background="@android:color/transparent"
-                        android:button="@drawable/bg_radio_language"
+                        android:button="@drawable/bg_uninst_radio"
                         android:checked="true"
                         android:fontFamily="@font/bold"
                         android:gravity="center_vertical"
@@ -203,9 +212,10 @@
                         android:id="@+id/rbDontNeed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
                         android:background="@android:color/transparent"
-                        android:button="@drawable/bg_radio_language"
-                        android:fontFamily="@font/medium"
+                        android:button="@drawable/bg_uninst_radio"
+                        android:fontFamily="@font/semi_bold"
                         android:gravity="center_vertical"
                         android:includeFontPadding="false"
                         android:minHeight="46dp"
@@ -218,9 +228,10 @@
                         android:id="@+id/rbOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
                         android:background="@android:color/transparent"
-                        android:button="@drawable/bg_radio_language"
-                        android:fontFamily="@font/medium"
+                        android:button="@drawable/bg_uninst_radio"
+                        android:fontFamily="@font/semi_bold"
                         android:gravity="center_vertical"
                         android:includeFontPadding="false"
                         android:minHeight="46dp"

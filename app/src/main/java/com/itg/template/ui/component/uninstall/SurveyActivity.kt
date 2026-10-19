@@ -46,7 +46,7 @@ class SurveyActivity : BaseActivity<ActivitySurveyBinding>() {
                 )
                 radio.typeface = ResourcesCompat.getFont(
                     this,
-                    if (selected) R.font.bold else R.font.medium
+                    if (selected) R.font.bold else R.font.semi_bold
                 )
             }
         }

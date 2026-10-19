@@ -69,7 +69,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:background="@null"
-                android:button="@drawable/bg_radio_language"
+                android:button="@drawable/bg_lang_radio"
                 android:checked="true"
                 android:clickable="false"
                 android:minWidth="0dp"

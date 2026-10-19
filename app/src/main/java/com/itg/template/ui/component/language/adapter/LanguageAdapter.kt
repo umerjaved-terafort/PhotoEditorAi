@@ -39,7 +39,13 @@ class LanguageAdapter(
                 binding.root.context,
                 if (isSelected) R.color.color_brand else R.color.color_stroke_soft
             )
-            binding.item.cardElevation = if (isSelected) 8f else 0f
+            val density = binding.root.resources.displayMetrics.density
+            binding.item.cardElevation = if (isSelected) 8f * density else 0f
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                val shadow = ContextCompat.getColor(binding.root.context, R.color.color_brand)
+                binding.item.outlineSpotShadowColor = shadow
+                binding.item.outlineAmbientShadowColor = shadow
+            }
         }
     }
 

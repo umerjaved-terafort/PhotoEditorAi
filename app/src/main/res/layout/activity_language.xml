@@ -18,27 +18,36 @@
             app:layout_constraintBottom_toTopOf="@id/flAds"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!-- Header row (44dp tall, 20dp from top): keeps the title aligned while llDone is gone -->
+            <Space
+                android:id="@+id/spaceLangHeader"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginEnd="12dp"
                 android:fontFamily="@font/bold"
                 android:includeFontPadding="false"
                 android:text="@string/language"
                 android:textColor="@color/color_brand_text"
                 android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="@id/llDone"
+                app:layout_constraintBottom_toBottomOf="@id/spaceLangHeader"
                 app:layout_constraintEnd_toStartOf="@id/llDone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/llDone" />
+                app:layout_constraintTop_toTopOf="@id/spaceLangHeader" />
 
             <LinearLayout
                 android:id="@+id/llDone"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bg_btn_primary"
                 android:clickable="true"
@@ -48,8 +57,9 @@
                 android:paddingStart="22dp"
                 android:paddingEnd="18dp"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/spaceLangHeader"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/spaceLangHeader"
                 tools:visibility="visible">
 
                 <TextView
@@ -64,26 +74,27 @@
 
                 <ImageView
                     android:id="@+id/ivDone"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_check_white" />
+                    android:src="@drawable/ic_lang_check" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="18dp"
+                android:clipChildren="false"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
+                android:paddingHorizontal="20dp"
                 android:paddingBottom="8dp"
                 android:visibility="visible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/spaceLangHeader"
                 tools:listitem="@layout/item_language" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

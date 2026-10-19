@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Intro page background: linear-gradient(180deg, #F9F4FF, #FDF7FC) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="#FDF7FC"
+        android:startColor="#F9F4FF" />
+</shape>

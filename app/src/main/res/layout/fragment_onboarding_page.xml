@@ -8,434 +8,507 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_splash_gradient"
-        tools:ignore="HardcodedText">
+        android:background="@drawable/bg_onb_page_gradient">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Hero: 376/844 (Intro 1, 4) or 520/844 (Intro 2, 3), bottom radius 36.
+                 Height percent is switched per page in OnboardingPageFragment. -->
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/heroFrame"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/layoutAds"
+                android:background="@drawable/bg_onb_hero_lilac"
+                android:clipChildren="true"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.44"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/heroFrame"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgOnboarding"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/PicsGenOnboardingHeroShape"
+                    tools:src="@drawable/img_onboarding_1" />
+
+                <!-- Intro 3: left "before" half (blurred / desaturated copy of the hero image) -->
+                <FrameLayout
+                    android:id="@+id/overlayBeforeDim"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:clipChildren="true"
-                    app:layout_constraintHeight_default="percent"
-                    app:layout_constraintHeight_percent="0.445"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/overlayDivider"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imgOnboarding"
+                        android:id="@+id/imgBeforeBlur"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="start|top"
+                        android:contentDescription="@null"
                         android:scaleType="centerCrop"
-                        app:shapeAppearanceOverlay="@style/PicsGenOnboardingHeroShape"
-                        tools:src="@drawable/img_onboarding_1" />
+                        app:shapeAppearanceOverlay="@style/PicsGenOnboardingHeroShape" />
+                </FrameLayout>
 
-                    <LinearLayout
-                        android:id="@+id/overlayBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="48dp"
-                        android:background="@drawable/bg_overlay_badge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="14dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                <View
+                    android:id="@+id/overlayDivider"
+                    android:layout_width="3dp"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imgBadgeIcon"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_spark_pink" />
+                <!-- Intro 3: 44dp compare handle on the divider -->
+                <FrameLayout
+                    android:id="@+id/overlayCompare"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_onb_compare_handle"
+                    android:elevation="6dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/overlayDivider"
+                    app:layout_constraintStart_toStartOf="@id/overlayDivider"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.6">
 
-                        <TextView
-                            android:id="@+id/tvBadge"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:fontFamily="@font/bold"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/color_brand_text"
-                            android:textSize="13sp"
-                            tools:text="AI Templates" />
-                    </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_onb_compare" />
+                </FrameLayout>
 
-                    <LinearLayout
-                        android:id="@+id/overlayOriginal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.42"
-                        tools:visibility="visible">
+                <LinearLayout
+                    android:id="@+id/overlayBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_overlay_badge"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="92dp"
-                            android:layout_height="124dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="8dp"
-                            app:strokeColor="@color/white"
-                            app:strokeWidth="3dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@null"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/img_onboarding_1_thumb" />
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="22dp"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/bg_overlay_dark_pill"
-                            android:fontFamily="@font/bold"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="10dp"
-                            android:text="Original"
-                            android:textColor="@color/white"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:id="@+id/overlayPlay"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:background="@drawable/bg_play_circle"
-                        android:elevation="8dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.62">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_play_brand" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:id="@+id/overlayTimeline"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_chip_unselected"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/bold"
-                            android:text="0:03"
-                            android:textColor="@color/color_muted"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            style="@android:style/Widget.ProgressBar.Horizontal"
-                            android:layout_width="0dp"
-                            android:layout_height="4dp"
-                            android:layout_marginHorizontal="12dp"
-                            android:layout_weight="1"
-                            android:max="100"
-                            android:progress="40"
-                            android:progressDrawable="@drawable/bg_splash_progress" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/bold"
-                            android:text="0:08"
-                            android:textColor="@color/color_muted"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/overlayBeforeDim"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:background="#4D17131F"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/overlayDivider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/overlayDivider"
-                        android:layout_width="3dp"
-                        android:layout_height="0dp"
-                        android:background="@color/white"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgBadgeIcon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_onb_badge_sparkle" />
 
                     <TextView
-                        android:id="@+id/tvBefore"
+                        android:id="@+id/tvBadge"
                         android:layout_width="wrap_content"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/bold"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="13sp"
+                        tools:text="@string/onb_badge_ai_templates" />
+                </LinearLayout>
+
+                <!-- Intro 1: original thumbnail (sits 10dp above the chips row) -->
+                <LinearLayout
+                    android:id="@+id/overlayOriginal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/overlayChips"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="92dp"
+                        android:layout_height="124dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="3dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_onboarding_1_thumb" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="22dp"
+                        android:layout_marginTop="6dp"
                         android:background="@drawable/bg_overlay_dark_pill"
                         android:fontFamily="@font/bold"
                         android:gravity="center"
-                        android:paddingHorizontal="14dp"
-                        android:text="Before"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="10dp"
+                        android:text="@string/onb_label_original"
                         android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvAfter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="32dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/bg_chip_selected"
-                        android:fontFamily="@font/bold"
-                        android:gravity="center"
-                        android:paddingHorizontal="14dp"
-                        android:text="After"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                    <LinearLayout
-                        android:id="@+id/overlayThumbs"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@id/overlayChips"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/overlayBadge"
-                        app:layout_constraintVertical_bias="0.85">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="92dp"
-                            android:layout_height="124dp"
-                            android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="8dp"
-                            app:strokeColor="@color/white"
-                            app:strokeWidth="3dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@null"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/img_splash_card_2" />
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="92dp"
-                            android:layout_height="124dp"
-                            android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="8dp"
-                            app:strokeColor="@color/white"
-                            app:strokeWidth="3dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@null"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/img_splash_card_3" />
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="92dp"
-                            android:layout_height="124dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="8dp"
-                            app:strokeColor="@color/white"
-                            app:strokeWidth="3dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@null"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/img_onboarding_1_thumb" />
-                        </com.google.android.material.card.MaterialCardView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/overlayChips"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:layout_marginBottom="16dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:visibility="visible">
-
-                        <TextView
-                            android:id="@+id/chip1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/bg_chip_selected"
-                            android:fontFamily="@font/bold"
-                            android:gravity="center"
-                            android:paddingHorizontal="16dp"
-                            android:text="Anime"
-                            android:textColor="@color/white"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/chip2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/bg_chip_unselected"
-                            android:fontFamily="@font/bold"
-                            android:gravity="center"
-                            android:paddingHorizontal="16dp"
-                            android:text="Oil Paint"
-                            android:textColor="@color/color_brand_text"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/chip3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/bg_chip_unselected"
-                            android:fontFamily="@font/bold"
-                            android:gravity="center"
-                            android:paddingHorizontal="16dp"
-                            android:text="3D Cartoon"
-                            android:textColor="@color/color_brand_text"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="32dp"
-                    android:layout_marginTop="28dp"
-                    android:fontFamily="@font/bold"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/color_brand_text"
-                    android:textSize="26sp"
-                    app:layout_constraintTop_toBottomOf="@id/heroFrame"
-                    tools:text="Turn Any Photo into AI Art" />
-
-                <TextView
-                    android:id="@+id/tvDes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="32dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/regular"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/color_muted"
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
-                    tools:text="Restyle any photo in one tap." />
-
-                <LinearLayout
-                    android:id="@+id/layoutIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="8dp"
-                    android:layout_marginStart="24dp"
-                    android:gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="@id/btnNext"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/btnNext">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgIndicator0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="6dp"
-                        android:src="@drawable/ic_onboarding_indicator" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgIndicator1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="6dp"
-                        android:src="@drawable/ic_onboarding_indicator" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgIndicator2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="6dp"
-                        android:src="@drawable/ic_onboarding_indicator" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgIndicator3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_onboarding_indicator" />
+                        android:textSize="11sp" />
                 </LinearLayout>
 
+                <!-- Intro 2: play button -->
+                <FrameLayout
+                    android:id="@+id/overlayPlay"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/bg_play_circle"
+                    android:elevation="10dp"
+                    android:outlineSpotShadowColor="@color/color_brand"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.61"
+                    tools:targetApi="p">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_play_brand" />
+                </FrameLayout>
+
+                <!-- Intro 2: video timeline -->
+                <LinearLayout
+                    android:id="@+id/overlayTimeline"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="26dp"
+                    android:background="@drawable/bg_onb_timeline"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/onb_time_start"
+                        android:textColor="@color/color_muted"
+                        android:textSize="12sp" />
+
+                    <ProgressBar
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="4dp"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_weight="1"
+                        android:max="100"
+                        android:progress="40"
+                        android:progressDrawable="@drawable/bg_splash_progress" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/onb_time_end"
+                        android:textColor="@color/color_muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Intro 3: before / after labels -->
                 <TextView
-                    android:id="@+id/btnNext"
+                    android:id="@+id/tvBefore"
                     android:layout_width="wrap_content"
-                    android:layout_height="43dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/bg_button_next_onboarding"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_overlay_dark_pill"
                     android:fontFamily="@font/bold"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:minWidth="96dp"
-                    android:paddingHorizontal="34dp"
-                    android:text="@string/next"
-                    android:textAllCaps="false"
+                    android:paddingHorizontal="14dp"
+                    android:text="@string/onb_label_before"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvAfter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_chip_selected"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:paddingHorizontal="14dp"
+                    android:text="@string/onb_label_after"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Intro 4: three effect thumbnails, space-between across 20dp side margins -->
+                <LinearLayout
+                    android:id="@+id/overlayThumbs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/overlayChips"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="92dp"
+                        android:layout_height="124dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="3dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_splash_card_1" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="92dp"
+                        android:layout_height="124dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="3dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_splash_card_3" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="92dp"
+                        android:layout_height="124dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="3dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_splash_card_4" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Chips row: 22dp above hero bottom. Left-aligned on Intro 1, centred on Intro 4
+                     (horizontal bias set in OnboardingPageFragment). -->
+                <LinearLayout
+                    android:id="@+id/overlayChips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="22dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/chip1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_chip_selected"
+                        android:fontFamily="@font/bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        tools:text="@string/onb_chip_anime" />
+
+                    <TextView
+                        android:id="@+id/chip2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:fontFamily="@font/bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="13sp"
+                        tools:text="@string/onb_chip_oil_paint" />
+
+                    <TextView
+                        android:id="@+id/chip3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:fontFamily="@font/bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="@color/color_brand_text"
+                        android:textSize="13sp"
+                        tools:text="@string/onb_chip_3d_cartoon" />
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 26sp / 800 / line-height 1.2 / letter-spacing -0.3px -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.0115"
+                android:textColor="@color/color_brand_text"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/heroFrame"
+                app:lineHeight="31sp"
+                tools:text="@string/onboarding_title_1" />
+
+            <!-- 15sp / line-height 1.5 / #5E5870 -->
+            <TextView
+                android:id="@+id/tvDes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:maxLines="2"
+                android:textColor="@color/color_muted"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:lineHeight="22sp"
+                tools:text="@string/onboarding_des_1" />
+
+            <!-- Page indicator: 6dp dots, 24x6 active pill, 6dp gap -->
+            <LinearLayout
+                android:id="@+id/layoutIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="6dp"
+                android:layout_marginStart="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/btnNext"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btnNext">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIndicator0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="6dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_onboarding_indicator"
+                    tools:src="@drawable/ic_onboarding_indicator_selected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIndicator1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="6dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_onboarding_indicator" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIndicator2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="6dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_onboarding_indicator" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIndicator3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_onboarding_indicator" />
+            </LinearLayout>
+
+            <!-- Next / Start: 43dp pill, 34dp side padding, 15sp 800 white on #7B2FF7.
+                 Sits 21dp above the ad card (12dp row padding + 9dp ad margin) or above the
+                 screen bottom when the page has no ad. -->
+            <TextView
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="21dp"
+                android:background="@drawable/bg_button_next_onboarding"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="34dp"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@id/layoutAds"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <FrameLayout
                 android:id="@+id/layoutAds"

@@ -8,13 +8,74 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_splash_gradient">
+        android:background="@drawable/bg_welcome_background">
+
+        <!-- Decorative sparkles (design overlay; top margins are measured below the status bar) -->
+        <ImageView
+            android:id="@+id/sparkleTopStart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="86dp"
+            android:alpha="0.9"
+            android:importantForAccessibility="no"
+            android:src="@drawable/bg_welcome_sparkle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sparkleTopEnd"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="42dp"
+            android:alpha="0.8"
+            android:importantForAccessibility="no"
+            android:src="@drawable/bg_welcome_sparkle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sparkleTopSmall"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="80dp"
+            android:alpha="0.6"
+            android:importantForAccessibility="no"
+            android:src="@drawable/bg_welcome_sparkle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sparkleMidEnd"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="398dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.7"
+            android:importantForAccessibility="no"
+            android:src="@drawable/bg_welcome_sparkle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sparkleLowStart"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="608dp"
+            android:alpha="0.7"
+            android:importantForAccessibility="no"
+            android:src="@drawable/bg_welcome_sparkle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/haloOuter"
             android:layout_width="240dp"
             android:layout_height="240dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="64dp"
             android:background="@drawable/bg_welcome_halo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,68 +105,84 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_photo_spark" />
+                android:importantForAccessibility="no"
+                android:src="@drawable/bg_welcome_glyph" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/tvAppLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/bold"
             android:gravity="center"
             android:text="@string/welcome_app_label"
             android:textColor="@color/color_muted"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/haloOuter" />
 
         <TextView
             android:id="@+id/tvLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/bold"
             android:gravity="center"
-            android:paddingHorizontal="24dp"
+            android:letterSpacing="-0.015"
             android:text="@string/well_comeback"
             android:textColor="@color/color_brand"
             android:textSize="34sp"
-            app:layout_constraintTop_toBottomOf="@id/tvAppLabel" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAppLabel"
+            app:lineHeight="39sp" />
 
         <TextView
             android:id="@+id/tvWelcomeDes"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="14dp"
             android:fontFamily="@font/regular"
             android:gravity="center"
             android:text="@string/welcome_subtitle"
             android:textColor="@color/color_muted"
             android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@id/tvLabel" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabel"
+            app:lineHeight="22.5sp" />
 
         <FrameLayout
             android:id="@+id/btnStart"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_btn_primary"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@id/fr_ads">
+            app:layout_constraintBottom_toTopOf="@id/fr_ads"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/tvStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/bold"
+                android:gravity="center_vertical"
                 android:text="@string/start_creating"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:visibility="gone"
+                app:drawableEndCompat="@drawable/bg_welcome_arrow"
                 tools:visibility="visible" />
 
             <ProgressBar

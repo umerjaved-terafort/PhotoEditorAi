@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon (Android 13+) silhouette of the PicsGen glyph; only alpha is used by the system. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:pathData="M33,42h22a9,9 0,0 1,9 9v22a9,9 0,0 1,-9 9h-22a9,9 0,0 1,-9 -9v-22a9,9 0,0 1,9 -9z"
+        android:strokeWidth="5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineJoin="round" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M51,55m-4.5,0a4.5,4.5 0,1 1,9 0a4.5,4.5 0,1 1,-9 0" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,75L41,59.5Q42,58 43,59.5L49,68L52.5,63.5Q53.5,62 54.5,63.5L61,75Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M72,20C73,28 76,31 84,32C76,33 73,36 72,44C71,36 68,33 60,32C68,31 71,28 72,20Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,51C80.5,55 82,56.5 86,57C82,57.5 80.5,59 80,63C79.5,59 78,57.5 74,57C78,56.5 79.5,55 80,51Z" />
+</vector>
