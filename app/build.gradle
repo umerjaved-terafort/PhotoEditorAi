@@ -17,6 +17,7 @@ android {
         targetSdk target_sdk_version
         versionCode 100
         versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         def formattedDate = new Date().format('MM.dd.yyyy')
         archivesBaseName = "ITG_Base_Project_v${versionName}_v${versionCode}_${formattedDate}"
@@ -195,4 +196,9 @@ dependencies {
 
     // Crash Module
     implementation project(':crash_screen')
+
+    // Tests
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_test_ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 }

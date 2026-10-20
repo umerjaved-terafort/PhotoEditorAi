@@ -1,5 +1,6 @@
 package com.itg.template.ui.component.language
 
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import com.ads.module.ads.wrapper.ApNativeAd
@@ -20,6 +21,7 @@ import com.itg.template.ui.bases.ext.isNetwork
 import com.itg.template.ui.bases.ext.visibleView
 import com.itg.template.ui.component.language.adapter.LanguageAdapter
 import com.itg.template.ui.component.language.data.LanguageData
+import com.itg.template.ui.component.main.MainActivity
 import com.itg.template.utils.ITGTrackingHelper
 import com.itg.template.utils.Routes
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +48,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     private val fromSetting
         get() = intent.getBooleanExtra(AppConstants.KEY_SETTING, false)
+                || intent.getBooleanExtra(EXTRA_FROM_SETTING, false)
 
     private var shouldDelayDoneButton = true
     private var selectedIso = LanguageData.defaultLanguage.iso
@@ -54,7 +57,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         LanguageAdapter(
             onItemLanguageClick = {
                 ITGTrackingHelper.logEvent(EventTracking.LANGUAGE_CLICK,null)
-                listenLanguageClickAd()
+                if (!fromSetting) listenLanguageClickAd()
                 delayShowDoneButton()
                 selectedIso = it.iso
                 LanguageData.selectLanguage(it.iso)
@@ -65,7 +68,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     override fun initViews() {
         ITGTrackingHelper.logEvent(EventTracking.LANGUAGE_FIRST,null)
-        isFromSetting = intent.getBooleanExtra(EXTRA_FROM_SETTING, false)
+        isFromSetting = fromSetting
         mBinding.tvTitle.setOnAdminAdToggleListener(){
             Routes.startSplashActivity(this@LanguageActivity)
             finish()
@@ -75,13 +78,18 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         initAdapter()
         initLayout()
 
-        mBinding.root.postDelayed({
-            loadNativeLanguageClick(this, appSharedPref.firstLanguage, R.layout.layout_native_language_click)
-            initAds()
-        }, 100L)
+        if (fromSetting) {
+            mBinding.flAds.goneView()
+        } else {
+            mBinding.root.postDelayed({
+                loadNativeLanguageClick(this, appSharedPref.firstLanguage, R.layout.layout_native_language_click)
+                initAds()
+            }, 100L)
+        }
     }
 
     override fun observerData() {
+        if (fromSetting) return
         listenLanguageAd()
     }
 
@@ -179,7 +187,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     private fun startNextActivity() {
         if (fromSetting) {
-            Routes.startMainActivity(this)
+            // Fresh task so the new locale applies and Setting/old Main aren't left in the back stack.
+            startActivity(
+                Intent(this, MainActivity::class.java)
+                    .putExtra(AppConstants.KEY_TRACKING_SCREEN_FROM, LanguageActivity::class.java.simpleName)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
         } else {
             appSharedPref.firstLanguage = false
             Routes.startOnBoardingActivity(this)

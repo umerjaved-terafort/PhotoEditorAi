@@ -6,6 +6,7 @@
     <data></data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_splash_gradient"
@@ -60,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/extra_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:lineSpacingMultiplier="1.35"
@@ -87,7 +88,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/bg_btn_primary"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/extra_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/try_again"

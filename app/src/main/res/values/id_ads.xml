@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- TODO: replace the Facebook App ID, Facebook Client Token and TikTok event token below with the real values from marketing (they are placeholders and show as invalid in the Dev config checklist). -->
     <string name="adjust_token" translatable="false">tg7654zascu8</string>
     <string name="facebook_app_id" translatable="false">123456789</string>
     <string name="facebook_client_token" translatable="false">123456789</string>

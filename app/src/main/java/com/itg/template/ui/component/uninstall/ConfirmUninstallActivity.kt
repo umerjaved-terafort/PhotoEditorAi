@@ -4,7 +4,11 @@ import android.widget.FrameLayout
 import com.ads.module.ads.wrapper.ApNativeAd
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.itg.template.R
+import com.itg.template.data.event.EventTracking
+import com.itg.template.utils.ITGTrackingHelper
+import com.itg.template.ads.AdRemoteConfig
 import com.itg.template.ads.AdsManager
+import com.itg.template.ads.RemoteConfigUtils
 import com.itg.template.ads.populateNativeAdView
 import com.itg.template.databinding.ActivityConfirmUninstallBinding
 import com.itg.template.ui.bases.BaseActivity
@@ -21,7 +25,24 @@ class ConfirmUninstallActivity : BaseActivity<ActivityConfirmUninstallBinding>()
 
     override fun initViews() {
         super.initViews()
+        ITGTrackingHelper.logEvent(EventTracking.UNINSTALL_CONFIRM, null)
+        initRemoteConfigIfOpenedDirectly()
         AdsManager.loadNativeConfirmUninstall(this, R.layout.layout_native_ad_large)
+    }
+
+    /**
+     * The Uninstall shortcut opens this screen directly (Splash is skipped), so on a cold start
+     * Remote Config was never fetched. Ads here use the bundled config straight away; the fetch
+     * runs in the background and updates AdRemoteConfig for the Survey screen.
+     */
+    private fun initRemoteConfigIfOpenedDirectly() {
+        if (RemoteConfigUtils.completed) return
+        val appContext = applicationContext
+        RemoteConfigUtils.init(appContext, object : RemoteConfigUtils.Listener {
+            override fun loadSuccess() {
+                AdRemoteConfig.initialize(appContext, RemoteConfigUtils.getAdRemoteConfig())
+            }
+        })
     }
 
     override fun observerData() {
@@ -68,7 +89,7 @@ class ConfirmUninstallActivity : BaseActivity<ActivityConfirmUninstallBinding>()
         }
     }
 
-    override fun onBackPressed() {
-        Routes.startMainActivity(this)
+    override fun onActivityBackPressed() {
+        whenBack()
     }
 }

@@ -1,16 +1,11 @@
 package com.itg.template.ui.component.onboarding
 
-import android.os.Build
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.ads.module.ads.ERainAd
 import com.itg.template.R
-import com.itg.template.ads.AdRemoteConfig
 import com.itg.template.ads.AdsManager
 import com.itg.template.ads.RemoteConfigUtils
-import com.itg.template.ads.native_onboarding_fullscreen_1_2
-import com.itg.template.ads.native_onboarding_fullscreen_2_2
 import com.itg.template.data.event.EventTracking
 import com.itg.template.databinding.ActivityOnboardingBinding
 import com.itg.template.ui.bases.BaseActivity
@@ -18,7 +13,6 @@ import com.itg.template.ui.bases.ext.isNetwork
 import com.itg.template.ui.component.onboarding.adapter.OnboardingAdapter
 import com.itg.template.ui.component.onboarding.model.OnboardingItem
 import com.itg.template.ui.component.onboarding.viewmodel.OnboardingViewModel
-import com.itg.template.ui.component.uninstall.ShortcutManager
 import com.itg.template.utils.ITGTrackingHelper
 import com.itg.template.utils.Routes
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +31,6 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
     override fun initViews() {
         initPage()
         initOnboardingItems()
-        applyUninstallWidgetShortcutsFromRemoteConfig()
 
         mBinding.root.postDelayed({
             AdsManager.loadNativeOnboarding4(
@@ -56,13 +49,6 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         }, 100L)
     }
 
-    private fun applyUninstallWidgetShortcutsFromRemoteConfig() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) return
-        if (ERainAd.getInstance().getShouldDisplayWidgetUninstall(
-                RemoteConfigUtils.getOnEnableUninstallWidget())) {
-            ShortcutManager.initShortCut(this@OnBoardingActivity)
-        }
-    }
 
     override fun observerData() {
         super.observerData()
@@ -84,15 +70,18 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
 
         mBinding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                ITGTrackingHelper.logEvent(when(position){
-                    0 -> { EventTracking.ONBOARDING_FIRST}
-                    1 -> { EventTracking.ONBOARDING_SECOND}
-                    2 -> { EventTracking.ONBOARDING_FULL1}
-                    3 -> { EventTracking.ONBOARDING_THIRD}
-                    4 -> { EventTracking.ONBOARDING_FULL2}
-                    5 -> { EventTracking.ONBOARDING_4th}
+                // Map from the page itself: the full-screen native page is optional, so positions shift.
+                val item = onboardingItems.getOrNull(position) ?: return
+                val event = if (item.isHasNativeFull) {
+                    val fullIndex = onboardingItems.take(position + 1).count { it.isHasNativeFull }
+                    if (fullIndex <= 1) EventTracking.ONBOARDING_FULL1 else EventTracking.ONBOARDING_FULL2
+                } else when (item.positionIndicator) {
+                    1 -> EventTracking.ONBOARDING_SECOND
+                    2 -> EventTracking.ONBOARDING_THIRD
+                    3 -> EventTracking.ONBOARDING_4th
                     else -> EventTracking.ONBOARDING_FIRST
-                }, null)
+                }
+                ITGTrackingHelper.logEvent(event, null)
             }
         })
     }
@@ -119,13 +108,8 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
             )
         )
 
-        val fullConfig = if (appSharedPref.firstOnBoarding) {
-            AdRemoteConfig.native_onboarding_fullscreen_1_2
-        } else {
-            AdRemoteConfig.native_onboarding_fullscreen_2_2
-        }
-        if (fullConfig.isEnable && isNetwork(this@OnBoardingActivity) &&
-            ERainAd.getInstance().getShouldDisplayNativeOnboardingFull1(fullConfig.enableUaCheck)
+        if (isNetwork(this@OnBoardingActivity) &&
+            AdsManager.shouldShowNativeOnboardingFull(appSharedPref.firstOnBoarding)
         ) {
             onboardingItems.add(
                 OnboardingItem(
@@ -139,7 +123,7 @@ class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
                 title = R.string.onboarding_title_3,
                 description = R.string.onboarding_des_3,
                 textButton = R.string.next,
-                imageResId = R.drawable.img_onboarding_3,
+                imageResId = R.drawable.img_onboarding_3_compare,
                 positionIndicator = 2,
             )
         )

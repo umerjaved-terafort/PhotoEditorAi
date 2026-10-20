@@ -30,6 +30,8 @@ import com.itg.template.ui.component.language.LanguageActivity
 import com.itg.template.ui.component.onboarding.OnBoardingActivity
 import com.itg.template.ui.component.splash.SplashActivity
 import com.itg.template.ui.component.uninstall.ConfirmUninstallActivity
+import com.itg.template.ui.component.uninstall.SurveyActivity
+import com.itg.template.ui.component.welcome.WelcomeActivity
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import kotlin.jvm.java
@@ -93,6 +95,8 @@ class GlobalApp : AdsMultiDexApplication() {
         AppOpenManager.getInstance().disableAppResumeWithActivity(LanguageActivity::class.java)
         AppOpenManager.getInstance().disableAppResumeWithActivity(OnBoardingActivity::class.java)
         AppOpenManager.getInstance().disableAppResumeWithActivity(ConfirmUninstallActivity::class.java)
+        AppOpenManager.getInstance().disableAppResumeWithActivity(SurveyActivity::class.java)
+        AppOpenManager.getInstance().disableAppResumeWithActivity(WelcomeActivity::class.java)
 
     }
 

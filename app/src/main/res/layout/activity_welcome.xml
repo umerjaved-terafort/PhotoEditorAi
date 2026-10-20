@@ -6,6 +6,7 @@
     <data></data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_welcome_background">
@@ -130,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/extra_bold"
             android:gravity="center"
             android:letterSpacing="-0.015"
             android:text="@string/well_comeback"
@@ -176,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:drawablePadding="8dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/extra_bold"
                 android:gravity="center_vertical"
                 android:text="@string/start_creating"
                 android:textColor="@color/white"

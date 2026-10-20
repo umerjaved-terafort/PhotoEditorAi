@@ -16,16 +16,20 @@
             android:layout_height="match_parent">
 
             <!-- Hero: 376/844 (Intro 1, 4) or 520/844 (Intro 2, 3), bottom radius 36.
-                 Height percent is switched per page in OnboardingPageFragment. -->
+                 Top of a packed chain hero -> title -> description -> (above Next). The hero fills the free
+                 space up to a per-page max height (set in OnboardingPageFragment), so it shrinks instead
+                 of letting the text run under the Next/Start button on short screens or with an ad. -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/heroFrame"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@drawable/bg_onb_hero_lilac"
                 android:clipChildren="true"
-                app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.44"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toTopOf="@id/tvTitle"
+                app:layout_constraintHeight_default="spread"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintVertical_chainStyle="packed">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgOnboarding"
@@ -95,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="48dp"
                     android:background="@drawable/bg_overlay_badge"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -299,7 +303,7 @@
                             android:layout_height="match_parent"
                             android:contentDescription="@null"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img_splash_card_1" />
+                            android:src="@drawable/img_onb4_thumb_toonify" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <Space
@@ -320,7 +324,7 @@
                             android:layout_height="match_parent"
                             android:contentDescription="@null"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img_splash_card_3" />
+                            android:src="@drawable/img_onb4_thumb_hair" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <Space
@@ -341,7 +345,7 @@
                             android:layout_height="match_parent"
                             android:contentDescription="@null"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img_splash_card_4" />
+                            android:src="@drawable/img_onb4_thumb_trending" />
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
@@ -413,13 +417,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="28dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/extra_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:letterSpacing="-0.0115"
                 android:textColor="@color/color_brand_text"
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvDes"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/heroFrame"
                 app:lineHeight="31sp"
@@ -432,13 +439,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
                 android:fontFamily="@font/regular"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:maxLines="2"
+                android:ellipsize="end"
                 android:textColor="@color/color_muted"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btnNext"
+                app:layout_constrainedHeight="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 app:lineHeight="22sp"
@@ -499,7 +510,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="21dp"
                 android:background="@drawable/bg_button_next_onboarding"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/extra_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="34dp"

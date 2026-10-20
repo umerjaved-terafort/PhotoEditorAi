@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:paddingTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_section_bg"

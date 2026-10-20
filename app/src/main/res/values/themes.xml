@@ -13,11 +13,15 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Window background -->
         <item name="android:windowBackground">@color/color_bg_screen</item>
-        <!-- Enable translucent status for edge-to-edge -->
-        <item name="android:windowTranslucentStatus">true</item>
+        <!-- Status bar is hidden app-wide by BaseActivity.setUpSystemBars (swipe shows it transiently) -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <!-- Disable fullscreen to show status bar -->
         <item name="android:windowFullscreen">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="27">shortEdges</item>
+        <!-- Design font (Plus Jakarta Sans) as default for every text view.
+             Only android:fontFamily here: AppCompat gives the theme's app "fontFamily" priority over a
+             view's own android:fontFamily, which forced every text to Regular (QA Ai Photo_11). -->
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
         <!-- No title bar -->
         <item name="android:windowNoTitle">true</item>
         <!-- Optional: Disable layout animations -->
@@ -75,7 +79,8 @@
     <style name="Theme.Splash" parent="Theme.Main">
         <item name="android:windowBackground">@drawable/bg_splash_gradient</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
+        <!-- Hide status bar from the first frame (no flash before BaseActivity hides it) -->
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowActionBar">false</item>
     </style>

@@ -15,4 +15,8 @@ object EventTracking {
     const val ONBOARDING_FULL2 = "obd_full_2_scr_view"
 
     const val HOME_SCREEN = "home_scr_view"
+    const val WELCOME_BACK = "welcome_back_scr_view"
+    const val SETTING = "setting_scr_view"
+    const val UNINSTALL_CONFIRM = "uninstall_scr_view"
+    const val UNINSTALL_SURVEY = "survey_uninstall_scr_view"
 }

@@ -7,6 +7,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import com.ads.module.ads.wrapper.ApNativeAd
 import com.itg.template.R
+import com.itg.template.data.event.EventTracking
+import com.itg.template.utils.ITGTrackingHelper
 import com.itg.template.ads.AdsManager
 import com.itg.template.ads.populateNativeAdView
 import com.itg.template.databinding.ActivitySurveyBinding
@@ -24,6 +26,7 @@ class SurveyActivity : BaseActivity<ActivitySurveyBinding>() {
 
     override fun initViews() {
         super.initViews()
+        ITGTrackingHelper.logEvent(EventTracking.UNINSTALL_SURVEY, null)
         bindSurveyRadios()
         AdsManager.loadNativeSurvey(this, R.layout.layout_native_ad_large)
     }

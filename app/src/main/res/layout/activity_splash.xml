@@ -273,7 +273,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/extra_bold"
                     android:includeFontPadding="false"
                     android:letterSpacing="-0.016"
                     android:text="@string/brand_ai"
@@ -283,7 +283,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/extra_bold"
                     android:includeFontPadding="false"
                     android:letterSpacing="-0.016"
                     android:text="@string/brand_photo"

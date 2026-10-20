@@ -10,7 +10,10 @@ import android.widget.Toast
 import com.ads.module.admob.AppOpenManager
 import com.itg.template.BuildConfig
 import com.itg.template.R
+import com.itg.template.data.event.EventTracking
+import com.itg.template.utils.ITGTrackingHelper
 import com.itg.template.app.AppConstants
+import com.itg.template.app.ResumeAdsEntryRule
 import com.itg.template.databinding.ActivitySettingBinding
 import com.itg.template.ui.bases.BaseActivity
 import com.itg.template.ui.bases.ext.click
@@ -23,6 +26,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     override fun getLayoutActivity(): Int = R.layout.activity_setting
+
+    override fun initViews() {
+        super.initViews()
+        ITGTrackingHelper.logEvent(EventTracking.SETTING, null)
+    }
 
     override fun onClickViews() {
         super.onClickViews()
@@ -111,7 +119,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     override fun onResume() {
         super.onResume()
 
-        enableAdsResume()
+        // Only re-enable open-resume when it's the active resume mode (Welcome-back mode keeps it off).
+        if (ResumeAdsEntryRule.shouldEnableOpenResume()) enableAdsResume()
     }
 
     private fun disableAdsResume() {

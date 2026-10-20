@@ -1,10 +1,5 @@
 package com.itg.template.ui.component.onboarding.adapter
 
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
-import android.graphics.RenderEffect
-import android.graphics.Shader
-import android.os.Build
 import android.util.TypedValue
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -33,6 +28,8 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
 
     companion object {
         private const val ARG_ONBOARDING_ITEM = "arg_onboarding_item"
+        private const val TITLE_MAX_SP = 26f
+        private const val TITLE_MIN_SP = 20f
 
         fun newInstance(onboardingItem: OnboardingItem) = OnboardingPageFragment().apply {
             arguments = bundleOf(ARG_ONBOARDING_ITEM to onboardingItem)
@@ -100,7 +97,7 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
             } else {
                 mBinding.layoutContent.visibleView()
                 mBinding.layoutAdsFull.invisibleView()
-                mBinding.layoutAds.invisibleView()
+                mBinding.layoutAds.goneView()
                 mBinding.imgCloseAdsFull.invisibleView()
             }
         } else if (onboardingItem.isHasNativeOnPage1 || onboardingItem.isHasNativeOnPage4) {
@@ -113,7 +110,7 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
                     mBinding.shimmerAds.shimmerNativeMedium
                 )
             } else {
-                mBinding.layoutAds.invisibleView()
+                mBinding.layoutAds.goneView()
             }
             mBinding.layoutContent.visibleView()
             mBinding.layoutAdsFull.invisibleView()
@@ -131,6 +128,7 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
     private fun updateLayout() {
         Glide.with(this).load(onboardingItem.imageResId).into(mBinding.imgOnboarding)
         mBinding.tvTitle.text = getString(onboardingItem.title)
+        fitTitleToOneLine()
         mBinding.tvDes.text = getString(onboardingItem.description)
         mBinding.btnNext.text = getString(onboardingItem.textButton)
         mBinding.imgIndicator0.setImageResource(R.drawable.ic_onboarding_indicator)
@@ -149,11 +147,15 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
 
     /**
      * Design hero heights (below the status bar): 344/778 for Intro 1 & 4, 488/778 for Intro 2 & 3.
-     * Percent is relative to the full page so the ad card below doesn't shrink the hero.
+     * Used as a max height: the hero fills the space above title/description up to this share of
+     * the page, and shrinks when the text plus the ad card need more room (no overlap with Next).
      */
     private fun applyHeroHeight(page: Int) {
-        mBinding.heroFrame.updateLayoutParams<ConstraintLayout.LayoutParams> {
-            matchConstraintPercentHeight = if (page == 1 || page == 2) 0.62f else 0.44f
+        val percent = if (page == 1 || page == 2) 0.62f else 0.44f
+        mBinding.layoutContent.doOnLayout { content ->
+            mBinding.heroFrame.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                matchConstraintMaxHeight = (content.height * percent).toInt()
+            }
         }
         mBinding.heroFrame.setBackgroundResource(
             when (page) {
@@ -201,12 +203,10 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
             2 -> {
                 mBinding.imgBadgeIcon.setImageResource(R.drawable.ic_onb_badge_upscale)
                 mBinding.tvBadge.setText(R.string.onb_badge_upscale_hd)
-                mBinding.overlayBeforeDim.visibleView()
-                mBinding.overlayDivider.visibleView()
-                mBinding.overlayCompare.visibleView()
+                // The blurred "before" half, divider and compare handle are part of the hero image
+                // (img_onboarding_3_compare); only the labels are drawn on top.
                 mBinding.tvBefore.visibleView()
                 mBinding.tvAfter.visibleView()
-                setupBeforeHalf()
             }
             3 -> {
                 // Intro 4 has no top badge in the design.
@@ -229,27 +229,29 @@ class OnboardingPageFragment : BaseFragment<FragmentOnboardingPageBinding>() {
     }
 
     /**
-     * Intro 3 "before" half: same hero image, blurred (API 31+) and desaturated, clipped to the
-     * left of the divider. The inner image is sized to the full hero so it lines up with the "after" image.
+     * Design titles are one line at 26sp on a 390dp-wide screen. On narrower phones (e.g. 360dp)
+     * they wrapped, so shrink the size just enough to keep one line, down to 20sp. Longer
+     * translations that still don't fit at 20sp keep 26sp and wrap (maxLines = 3).
      */
-    private fun setupBeforeHalf() {
-        val before = mBinding.imgBeforeBlur
-        Glide.with(this).load(onboardingItem.imageResId).into(before)
-        before.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply {
-            setSaturation(0.7f)
-            postConcat(ColorMatrix().apply { setScale(0.95f, 0.95f, 0.95f, 1f) })
-        })
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val radius = dp(4f).toFloat()
-            before.setRenderEffect(RenderEffect.createBlurEffect(radius, radius, Shader.TileMode.CLAMP))
-        }
-        mBinding.heroFrame.doOnLayout { hero ->
-            before.updateLayoutParams {
-                width = hero.width
-                height = hero.height
+    private fun fitTitleToOneLine() {
+        val title = mBinding.tvTitle
+        title.doOnLayout {
+            val available = title.width - title.paddingStart - title.paddingEnd
+            if (available <= 0) return@doOnLayout
+            val text = title.text.toString()
+            val paint = android.text.TextPaint(title.paint)
+            var sizeSp = TITLE_MAX_SP
+            while (sizeSp >= TITLE_MIN_SP) {
+                paint.textSize = spToPx(sizeSp)
+                if (paint.measureText(text) <= available) break
+                sizeSp -= 0.5f
             }
+            title.setTextSize(TypedValue.COMPLEX_UNIT_SP, if (sizeSp >= TITLE_MIN_SP) sizeSp else TITLE_MAX_SP)
         }
     }
+
+    private fun spToPx(sp: Float): Float =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, resources.displayMetrics)
 
     private fun dp(value: Float): Int =
         TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, resources.displayMetrics).toInt()

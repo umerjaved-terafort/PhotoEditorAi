@@ -126,6 +126,16 @@ object AdsManager {
         )
     }
 
+    /**
+     * Full-screen onboarding natives are UA-only placements: always gate them on the
+     * Unlimited-ads (organic) flag, even if remote config omits/sets enable_ua_check=false.
+     */
+    fun shouldShowNativeOnboardingFull(isFirst: Boolean): Boolean {
+        val config =
+            if (isFirst) AdRemoteConfig.native_onboarding_fullscreen_1_2 else AdRemoteConfig.native_onboarding_fullscreen_2_2
+        return config.isEnable && ERainAd.getInstance().getShouldDisplayNativeOnboardingFull1(true)
+    }
+
     fun loadNativeOnboardingFull(activity: Activity, isFirst: Boolean, layoutRes: Int) {
         val config =
             if (isFirst) AdRemoteConfig.native_onboarding_fullscreen_1_2 else AdRemoteConfig.native_onboarding_fullscreen_2_2
@@ -134,7 +144,7 @@ object AdsManager {
             config,
             layoutRes,
             nativeAdOnBoardingFullLive,
-            ERainAd.getInstance().getShouldDisplayNativeOnboardingFull1(config.enableUaCheck)
+            shouldShowNativeOnboardingFull(isFirst)
         )
     }
 
@@ -146,7 +156,7 @@ object AdsManager {
             config,
             layoutRes,
             nativeAdOnBoardingFull2Live,
-            ERainAd.getInstance().getShouldDisplayNativeOnboardingFull2(config.enableUaCheck)
+            ERainAd.getInstance().getShouldDisplayNativeOnboardingFull2(true)
         )
     }
 
@@ -252,8 +262,10 @@ object AdsManager {
 
     fun showInterOnboarding(context: Context, ignoreLimit: Boolean = false, onAction: () -> Unit) {
         val interstitial = interOnboarding
+        val allowShow = ignoreLimit || ERainAd.getInstance()
+            .getShouldDisplayInterOnboarding(AdRemoteConfig.inter_onboarding.enableUaCheck)
         if (interstitial != null && interstitial.isReady && !AppPurchase.getInstance()
-                .isPurchased(context) && (ignoreLimit)
+                .isPurchased(context) && allowShow
         ) {
             ERainAd.getInstance()
                 .forceShowInterstitial(context, interstitial, object : AdCallback() {

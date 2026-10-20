@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -123,20 +124,30 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        // Dialogs, ads and the keyboard can bring the bars back; hide them again on return.
+        if (hasFocus) hideSystemBars()
+    }
+
+    private fun hideSystemBars() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, mBinding.root).apply {
+            hide(WindowInsetsCompat.Type.statusBars())
+            if (!shouldShowNavigationBars) hide(WindowInsetsCompat.Type.navigationBars())
+            systemBarsBehavior = BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+    }
+
     private fun setUpSystemBars() {
+        hideSystemBars()
         ViewCompat.setOnApplyWindowInsetsListener(mBinding.root) { view, insets ->
-            if (!shouldShowNavigationBars) {
-                val controller = WindowInsetsControllerCompat(window, view)
-                controller.hide(WindowInsetsCompat.Type.navigationBars())
-                controller.systemBarsBehavior = BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            } else {
-                val navigationBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
-                view.updatePadding(bottom = navigationBarInsets.bottom)
-            }
-
-            val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
-            view.updatePadding(top = statusBarInsets.top)
-
+            val bottom = if (shouldShowNavigationBars) {
+                insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            } else 0
+            // Status bar is hidden app-wide; layouts keep the design's 32dp top area (former status bar)
+            // as their own top padding/margin, so the top padding from XML is left untouched here.
+            view.updatePadding(bottom = bottom)
             insets
         }
     }

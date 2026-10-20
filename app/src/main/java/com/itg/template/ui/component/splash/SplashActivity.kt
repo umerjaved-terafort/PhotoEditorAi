@@ -27,6 +27,7 @@ import com.itg.template.ui.bases.ConsentHandler
 import com.itg.template.ui.bases.ext.goneView
 import com.itg.template.ui.bases.ext.isNetwork
 import com.itg.template.ui.bases.ext.visibleView
+import com.itg.template.ui.component.uninstall.ShortcutManager
 import com.itg.template.utils.ITGTrackingHelper
 import com.itg.template.utils.Routes
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.Listener {
 
     private var getConfigSuccess = false
+    private var configHandled = false
+    private var isMoved = false
+    private var configTimer: CountDownTimer? = null
     private var showLanguageNextTime = true
     private var simpleExoPlayer: ExoPlayer? = null
     private lateinit var consentHandler: ConsentHandler
@@ -91,7 +95,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
     }
 
     private fun loadingRemoteConfig() {
-        object : CountDownTimer(AppConstants.DEFAULT_TIME_SPLASH, 100) {
+        configTimer?.cancel()
+        configTimer = object : CountDownTimer(AppConstants.DEFAULT_TIME_SPLASH, 100) {
             override fun onTick(millisUntilFinished: Long) {
                 val elapsed = AppConstants.DEFAULT_TIME_SPLASH - millisUntilFinished
                 val progress = (10 + elapsed * 80 / AppConstants.DEFAULT_TIME_SPLASH).toInt()
@@ -104,17 +109,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
 
             override fun onFinish() {
                 mBinding.progressSplash.progress = 90
-                if (!getConfigSuccess) {
-                    checkRemoteConfigResult()
-                }
+                // Always proceed once: covers config failure and config arriving after the last tick.
+                checkRemoteConfigResult()
             }
         }.start()
     }
 
 
     private fun checkRemoteConfigResult() {
+        if (configHandled || isFinishing || isDestroyed) return
+        configHandled = true
         ITGTrackingHelper.logEvent(EventTracking.REQUEST_AD, null)
         AdRemoteConfig.initialize(this, RemoteConfigUtils.getAdRemoteConfig())
+        ShortcutManager.applyFromRemoteConfig(applicationContext)
         loadSplashBanner()
         if (!isFromUninstallShortcut) {
             loadNativeLanguage(
@@ -163,6 +170,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
     }
 
     private fun moveActivity() {
+        if (isMoved) return
+        isMoved = true
         stopVideo()
         when {
             isFromUninstallShortcut -> Routes.startConfirmUninstallActivity(this)
@@ -204,6 +213,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), RemoteConfigUtils.
 
     override fun onDestroy() {
         super.onDestroy()
+        configTimer?.cancel()
+        configTimer = null
         if (::consentHandler.isInitialized) {
             consentHandler.clear()
         }
